@@ -1141,20 +1141,20 @@
       {
         id: "lambo-aventador-2018",
         make: "Lamborghini",
-        model: "Aventador S",
+        model: "Aventador SVJ",
         yearStart: 2016,
         yearEnd: 2021,
         bodyStyle: "Coupe",
         fuelType: "Petrol",
-        horsepower: 740,
-        torqueNm: 690,
-        zeroTo100: 2.9,
+        horsepower: 770,
+        torqueNm: 720,
+        zeroTo100: 2.8,
         topSpeedKph: 350,
         dailyScore: 4,
         cheapScore: 1,
         fastScore: 10,
         electric: false,
-        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg",
+        imageUrl: "https://www.lambocars.com/wp-content/uploads/2020/11/aventador_svj_10.jpg",
         soundUrl: "lambo-svj-rev.mp3"
       }
     ];
@@ -1428,6 +1428,13 @@
     document.body.addEventListener("click", (e) => {
       const btn = e.target.closest("button");
       if (!btn) return;
+      const action = btn.dataset.action;
+const id = btn.dataset.id;
+
+if (action === "rev") {
+  const car = soundCars.find(c => c.id === id);
+  if (car) playRevSound(car);
+}
 
       const id = btn.dataset.id;
       const action = btn.dataset.action;
