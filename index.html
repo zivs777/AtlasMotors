@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Atlas Motors</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #05060a;
+      color: #f5f5f5;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #0b0d13;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-link {
+      margin-left: 1rem;
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .nav-link:hover {
+      color: #fff;
+    }
+
+    .section {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      text-align: center;
+      padding-top: 3rem;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-wrapper {
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+
+    #searchInput {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border-radius: 999px;
+      border: 1px solid #333;
+      background: #0b0d13;
+      color: #f5f5f5;
+    }
+
+    #searchInput:focus {
+      outline: none;
+      border-color: #4f8cff;
+    }
+
+    .quick-categories {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .chip {
+      border-radius: 999px;
+      border: 1px solid #333;
+      background: #11131a;
+      color: #f5f5f5;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .chip:hover {
+      border-color: #4f8cff;
+    }
+
+    .cars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+    }
+
+    .car-card {
+      background: #0b0d13;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      border: 1px solid #181a22;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .car-title {
+      font-weight: 600;
+    }
+
+    .car-meta {
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 0.4rem 0.6rem;
+      font-size: 0.8rem;
+      border-radius: 0.4rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #4f8cff;
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #181a22;
+      color: #f5f5f5;
+    }
+
+    .btn-primary:hover {
+      background: #3a6ed1;
+    }
+
+    .btn-secondary:hover {
+      background: #222533;
+    }
+
+    .featured {
+      margin-top: 2rem;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      background: #0b0d13;
+      border: 1px solid #181a22;
+      text-align: left;
+    }
+
+    .featured h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .compare-card {
+      background: #0b0d13;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      border: 1px solid #181a22;
+      font-size: 0.85rem;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.hidden {
+      display: none;
+    }
+
+    .modal-content {
+      background: #05060a;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      max-width: 600px;
+      width: 90%;
+      border: 1px solid #181a22;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.8rem;
+      background: transparent;
+      border: none;
+      color: #aaa;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .footer {
+      padding: 1rem 2rem;
+      border-top: 1px solid #181a22;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Atlas Motors</div>
+    <nav class="nav">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#all-cars" class="nav-link">All Cars</a>
+      <a href="#compare" class="nav-link">Compare</a>
+      <a href="#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section id="home" class="section hero">
+      <h1>Search any car from 1950 to today</h1>
+      <div class="search-wrapper">
+        <input id="searchInput" type="text" placeholder="Search by make, model, year..." />
+      </div>
+
+      <div class="quick-categories">
+        <button class="chip" data-category="cheap">Best cheap cars this year</button>
+        <button class="chip" data-category="fast">Fastest cars</button>
+        <button class="chip" data-category="daily">Best daily cars</button>
+        <button class="chip" data-category="electric">Electric cars</button>
+      </div>
+
+      <section class="featured" id="carOfTheDay"></section>
+    </section>
+
+    <!-- All cars list -->
+    <section id="all-cars" class="section">
+      <h2>Explore all cars</h2>
+      <div id="carsGrid" class="cars-grid"></div>
+    </section>
+
+    <!-- Compare section -->
+    <section id="compare" class="section">
+      <h2>Compare cars</h2>
+      <p>Select up to 3 cars using the “Add to compare” button.</p>
+      <div id="compareGrid" class="compare-grid"></div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <h2>About Atlas Motors</h2>
+      <p>
+        Atlas Motors is a global car reference site designed to index car models
+        from the 1950s to today, with specs, performance data, and comparison tools.
+        This demo uses a small sample dataset—you can later plug in a full database or API.
+      </p>
+    </section>
+  </main>
+
+  <!-- Car detail modal -->
+  <div id="carModal" class="modal hidden">
+    <div class="modal-content">
+      <button id="closeModal" class="close-btn">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span>© Atlas Motors</span>
+  </footer>
+
+  <script>
+    // SAMPLE DATA (you can expand this later or connect to a real API)
+    const cars = [
+      {
+        id: "tesla-model-3-2024",
+        make: "Tesla",
+        model: "Model 3",
+        yearStart: 2017,
+        yearEnd: 2026,
+        bodyStyle: "Sedan",
+        fuelType: "Electric",
+        horsepower: 283,
+        torqueNm: 420,
+        zeroTo100: 6.1,
+        topSpeedKph: 201,
+        dailyScore: 9,
+        cheapScore: 5,
+        fastScore: 6,
+        electric: true
+      },
+      {
+        id: "toyota-corolla-2022",
+        make: "Toyota",
+        model: "Corolla",
+        yearStart: 2019,
+        yearEnd: 2026,
+        bodyStyle: "Hatchback",
+        fuelType: "Petrol",
+        horsepower: 132,
+        torqueNm: 159,
+        zeroTo100: 10.5,
+        topSpeedKph: 190,
+        dailyScore: 10,
+        cheapScore: 9,
+        fastScore: 3,
+        electric: false
+      },
+      {
+        id: "bmw-m3-2025",
+        make: "BMW",
+        model: "M3",
+        yearStart: 2021,
+        yearEnd: 2026,
+        bodyStyle: "Sedan",
+        fuelType: "Petrol",
+        horsepower: 510,
+        torqueNm: 650,
+        zeroTo100: 3.9,
+        topSpeedKph: 290,
+        dailyScore: 7,
+        cheapScore: 2,
+        fastScore: 10,
+        electric: false
+      },
+      {
+        id: "porsche-taycan-2026",
+        make: "Porsche",
+        model: "Taycan Turbo",
+        yearStart: 2020,
+        yearEnd: 2026,
+        bodyStyle: "Sedan",
+        fuelType: "Electric",
+        horsepower: 680,
+        torqueNm: 850,
+        zeroTo100: 3.2,
+        topSpeedKph: 260,
+        dailyScore: 8,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: true
+      },
+      {
+        id: "hyundai-ioniq5-2023",
+        make: "Hyundai",
+        model: "Ioniq 5",
+        yearStart: 2021,
+        yearEnd: 2026,
+        bodyStyle: "Crossover",
+        fuelType: "Electric",
+        horsepower: 225,
+        torqueNm: 605,
+        zeroTo100: 7.4,
+        topSpeedKph: 185,
+        dailyScore: 9,
+        cheapScore: 7,
+        fastScore: 5,
+        electric: true
+      },
+      {
+        id: "audi-rs6-2024",
+        make: "Audi",
+        model: "RS6 Avant",
+        yearStart: 2020,
+        yearEnd: 2026,
+        bodyStyle: "Wagon",
+        fuelType: "Petrol",
+        horsepower: 600,
+        torqueNm: 800,
+        zeroTo100: 3.6,
+        topSpeedKph: 305,
+        dailyScore: 8,
+        cheapScore: 2,
+        fastScore: 10,
+        electric: false
+      },
+      {
+        id: "kia-picanto-2021",
+        make: "Kia",
+        model: "Picanto",
+        yearStart: 2017,
+        yearEnd: 2024,
+        bodyStyle: "Hatchback",
+        fuelType: "Petrol",
+        horsepower: 84,
+        torqueNm: 122,
+        zeroTo100: 13.7,
+        topSpeedKph: 170,
+        dailyScore: 8,
+        cheapScore: 10,
+        fastScore: 2,
+        electric: false
+      }
+    ];
+
+    const searchInput = document.getElementById("searchInput");
+    const carsGrid = document.getElementById("carsGrid");
+    const carOfTheDay = document.getElementById("carOfTheDay");
+    const compareGrid = document.getElementById("compareGrid");
+    const chips = document.querySelectorAll(".chip");
+
+    const modal = document.getElementById("carModal");
+    const closeModalBtn = document.getElementById("closeModal");
+    const modalBody = document.getElementById("modalBody");
+
+    let compareList = [];
+
+    function renderCars(list) {
+      carsGrid.innerHTML = "";
+      if (list.length === 0) {
+        carsGrid.innerHTML = "<p>No cars found. Try another search.</p>";
+        return;
+      }
+      list.forEach((car) => {
+        const card = document.createElement("div");
+        card.className = "car-card";
+
+        card.innerHTML = `
+          <div class="car-title">${car.make} ${car.model}</div>
+          <div class="car-meta">${car.yearStart}–${car.yearEnd} • ${car.bodyStyle} • ${car.fuelType}</div>
+          <div class="car-meta">HP: ${car.horsepower} • Torque: ${car.torqueNm} Nm</div>
+          <div class="btn-row">
+            <button class="btn btn-primary" data-id="${car.id}" data-action="details">Details</button>
+            <button class="btn btn-secondary" data-id="${car.id}" data-action="compare">Add to compare</button>
+          </div>
+        `;
+
+        carsGrid.appendChild(card);
+      });
+    }
+
+    function renderCarOfTheDay() {
+      const car = cars[Math.floor(Math.random() * cars.length)];
+      carOfTheDay.innerHTML = `
+        <h3>Car of the day</h3>
+        <p><strong>${car.make} ${car.model}</strong> (${car.yearStart}–${car.yearEnd})</p>
+        <p>${car.bodyStyle} • ${car.fuelType}</p>
+        <p>HP: ${car.horsepower} • Torque: ${car.torqueNm} Nm • 0–100 km/h: ${car.zeroTo100}s</p>
+        <button class="btn btn-primary" data-id="${car.id}" data-action="details">View full specs</button>
+      `;
+    }
+
+    function openModal(car) {
+      modalBody.innerHTML = `
+        <h2>${car.make} ${car.model}</h2>
+        <p>${car.yearStart}–${car.yearEnd} • ${car.bodyStyle} • ${car.fuelType}</p>
+        <h3>Performance</h3>
+        <ul>
+          <li>Horsepower: ${car.horsepower} hp</li>
+          <li>Torque: ${car.torqueNm} Nm</li>
+          <li>0–100 km/h: ${car.zeroTo100} s</li>
+          <li>Top speed: ${car.topSpeedKph} km/h</li>
+        </ul>
+        <h3>Tags</h3>
+        <ul>
+          <li>Daily score: ${car.dailyScore}/10</li>
+          <li>Cheap score: ${car.cheapScore}/10</li>
+          <li>Fast score: ${car.fastScore}/10</li>
+          <li>Electric: ${car.electric ? "Yes" : "No"}</li>
+        </ul>
+      `;
+      modal.classList.remove("hidden");
+    }
+
+    function renderCompare() {
+      compareGrid.innerHTML = "";
+      if (compareList.length === 0) {
+        compareGrid.innerHTML = "<p>No cars selected yet.</p>";
+        return;
+      }
+      compareList.forEach((car) => {
+        const card = document.createElement("div");
+        card.className = "compare-card";
+        card.innerHTML = `
+          <h3>${car.make} ${car.model}</h3>
+          <p>${car.yearStart}–${car.yearEnd}</p>
+          <p>HP: ${car.horsepower}</p>
+          <p>Torque: ${car.torqueNm} Nm</p>
+          <p>0–100 km/h: ${car.zeroTo100} s</p>
+          <p>Top speed: ${car.topSpeedKph} km/h</p>
+          <p>Daily: ${car.dailyScore}/10 • Cheap: ${car.cheapScore}/10 • Fast: ${car.fastScore}/10</p>
+        `;
+        compareGrid.appendChild(card);
+      });
+    }
+
+    // Search
+    searchInput.addEventListener("input", (e) => {
+      const q = e.target.value.toLowerCase();
+      const filtered = cars.filter((car) => {
+        return (
+          car.make.toLowerCase().includes(q) ||
+          car.model.toLowerCase().includes(q) ||
+          String(car.yearStart).includes(q) ||
+          String(car.yearEnd).includes(q)
+        );
+      });
+      renderCars(filtered);
+    });
+
+    // Clicks (details + compare) including car of the day
+    document.body.addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+
+      const id = btn.dataset.id;
+      const action = btn.dataset.action;
+      if (!id || !action) return;
+
+      const car = cars.find((c) => c.id === id);
+      if (!car) return;
+
+      if (action === "details") {
+        openModal(car);
+      }
+
+      if (action === "compare") {
+        if (compareList.find((c) => c.id === car.id)) return;
+        if (compareList.length >= 3) {
+          alert("You can compare up to 3 cars at once.");
+          return;
+        }
+        compareList.push(car);
+        renderCompare();
+      }
+    });
+
+    // Categories
+    chips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const cat = chip.dataset.category;
+        let filtered = cars;
+
+        if (cat === "cheap") {
+          filtered = cars.filter((c) => c.cheapScore >= 7);
+        } else if (cat === "fast") {
+          filtered = cars.filter((c) => c.fastScore >= 8);
+        } else if (cat === "daily") {
+          filtered = cars.filter((c) => c.dailyScore >= 8);
+        } else if (cat === "electric") {
+          filtered = cars.filter((c) => c.electric);
+        }
+
+        renderCars(filtered);
+      });
+    });
+
+    // Modal close
+    closeModalBtn.addEventListener("click", () => {
+      modal.classList.add("hidden");
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+
+    // Initial render
+    renderCars(cars);
+    renderCarOfTheDay();
+    renderCompare();
+  </script>
+</body>
+</html>
