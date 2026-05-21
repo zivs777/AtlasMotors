@@ -1425,74 +1425,49 @@
       });
     });
 
-    document.body.addEventListener("click", (e) => {
-      const btn = e.target.closest("button");
-      if (!btn) return;
+<script>
+document.body.addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
 
-}
+  const id = btn.dataset.id;
+  const action = btn.dataset.action;
+  if (!action) return;
 
-      const id = btn.dataset.id;
-      const action = btn.dataset.action;
-      if (!action) return;
+  // If button has no ID and it's not a rev button, ignore it
+  if (!id && action !== "rev") return;
 
-      if (!id && action !== "rev") return;
+  // REV SOUND HANDLER
+  if (action === "rev") {
+    const car = soundCars.find(c => c.id === id);
+    if (car) playRevSound(car);
+    return;
+  }
 
-      if (id) {
-        const car = cars.find((c) => c.id === id);
-        if (!car) return;
+  // DETAILS + COMPARE HANDLING
+  if (id) {
+    const car = cars.find(c => c.id === id);
+    if (!car) return;
 
-        if (action === "details") {
-          openModal(car);
-        }
+    if (action === "details") {
+      openModal(car);
+      return;
+    }
 
-        if (action === "compare") {
-          if (compareList.find((c) => c.id === car.id)) return;
-          if (compareList.length >= 3) {
-            // Instead of freezing or overlay, just replace the first one
-            compareList.shift();
-          }
-          compareList.push(car);
-          renderCompare();
-        }
+    if (action === "compare") {
+      if (compareList.find(c => c.id === car.id)) return;
 
-        if (action === "rev") {
-          playRevSound(car);
-        }
-      } else if (action === "rev") {
-        // For fun garage buttons without id (handled above, but safe)
-        return;
+      if (compareList.length >= 3) {
+        compareList.shift();
       }
-    });
 
-    closeModalBtn.addEventListener("click", () => {
-      modal.classList.add("hidden");
-    });
-
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.add("hidden");
-      }
-    });
-
-    themeToggle.addEventListener("click", () => {
-      const current = document.body.getAttribute("data-theme");
-      document.body.setAttribute("data-theme", current === "dark" ? "light" : "dark");
-    });
-
-    aiOpinionBtn.addEventListener("click", generateAiOpinion);
-
-    resetCompareBtn.addEventListener("click", () => {
-      compareList = [];
+      compareList.push(car);
       renderCompare();
-      aiOpinionText.textContent = "Select 2–3 cars and choose a focus to get a custom opinion.";
-    });
+      return;
+    }
+  }
+});
+</script>
 
-    updateYearLabel();
-    renderCarOfTheDay();
-    updateCarsView();
-    renderCompare();
-    renderFunGarage();
-  </script>
 </body>
 </html>
-
