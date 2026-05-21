@@ -1428,12 +1428,7 @@
     document.body.addEventListener("click", (e) => {
       const btn = e.target.closest("button");
       if (!btn) return;
-      const action = btn.dataset.action;
-const id = btn.dataset.id;
 
-if (action === "rev") {
-  const car = soundCars.find(c => c.id === id);
-  if (car) playRevSound(car);
 }
 
 
