@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,27 +6,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg: #05060a;
-      --bg-alt: #0b0d13;
-      --card: #10131c;
-      --border: #1b1f2b;
-      --text: #f5f5f5;
-      --muted: #a0a4b5;
-      --accent: #ff3b5c;
-      --accent-soft: rgba(255, 59, 92, 0.18);
-      --accent2: #4f8cff;
+      --bg: #0f172a;
+      --bg-alt: #0b1120;
+      --card: #111827;
+      --border: #1f2937;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.18);
+      --accent2: #3b82f6;
     }
 
     body[data-theme="light"] {
-      --bg: #f5f5f5;
+      --bg: #e5f0ff;
       --bg-alt: #ffffff;
-      --card: #f0f2f8;
-      --border: #d0d4e0;
-      --text: #11131a;
-      --muted: #555a6b;
-      --accent: #ff3b5c;
-      --accent-soft: rgba(255, 59, 92, 0.12);
-      --accent2: #2f5fdc;
+      --card: #f3f4ff;
+      --border: #cbd5f5;
+      --text: #0f172a;
+      --muted: #4b5563;
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.12);
+      --accent2: #2563eb;
     }
 
     * {
@@ -38,7 +37,7 @@
     }
 
     body {
-      background: radial-gradient(circle at top, #15182a 0, var(--bg) 45%);
+      background: radial-gradient(circle at top, #38bdf8 0, var(--bg) 45%);
       color: var(--text);
     }
 
@@ -47,7 +46,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      background: linear-gradient(90deg, #05060a, #10131c);
+      background: linear-gradient(90deg, #0f172a, #1e293b);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
@@ -68,12 +67,12 @@
       width: 22px;
       height: 22px;
       border-radius: 6px;
-      background: radial-gradient(circle at 30% 20%, #ffffff, #ff3b5c);
+      background: radial-gradient(circle at 30% 20%, #ffffff, #f97316);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.7rem;
-      color: #05060a;
+      color: #111827;
       font-weight: 900;
     }
 
@@ -93,7 +92,7 @@
 
     .nav-link:hover {
       color: var(--text);
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.08);
     }
 
     .toggle-btn {
@@ -133,7 +132,7 @@
     }
 
     .hero-text h1 {
-      font-size: 2.2rem;
+      font-size: 2.3rem;
       margin-bottom: 0.75rem;
     }
 
@@ -157,9 +156,13 @@
       padding: 0.9rem 1rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(5, 6, 10, 0.7);
+      background: rgba(15, 23, 42, 0.85);
       color: var(--text);
       backdrop-filter: blur(10px);
+    }
+
+    body[data-theme="light"] #searchInput {
+      background: #ffffff;
     }
 
     #searchInput:focus {
@@ -188,6 +191,11 @@
       font-size: 0.8rem;
     }
 
+    body[data-theme="light"] .filters-row select,
+    body[data-theme="light"] .filters-row input[type="range"] {
+      background: #ffffff;
+    }
+
     .filters-row label {
       display: flex;
       align-items: center;
@@ -204,11 +212,15 @@
     .chip {
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(10, 12, 20, 0.9);
+      background: rgba(15, 23, 42, 0.9);
       color: var(--muted);
       padding: 0.4rem 0.9rem;
       font-size: 0.8rem;
       cursor: pointer;
+    }
+
+    body[data-theme="light"] .chip {
+      background: #ffffff;
     }
 
     .chip:hover {
@@ -248,8 +260,12 @@
       padding: 0.2rem 0.6rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(5, 6, 10, 0.7);
+      background: rgba(15, 23, 42, 0.9);
       color: var(--muted);
+    }
+
+    body[data-theme="light"] .hero-badge {
+      background: #ffffff;
     }
 
     .btn {
@@ -261,7 +277,7 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #ff6b8a);
+      background: linear-gradient(135deg, var(--accent), #fb923c);
       color: #fff;
     }
 
@@ -269,6 +285,10 @@
       background: var(--card);
       color: var(--text);
       border: 1px solid var(--border);
+    }
+
+    body[data-theme="light"] .btn-secondary {
+      background: #ffffff;
     }
 
     .btn-primary:hover {
@@ -346,6 +366,7 @@
       display: flex;
       gap: 0.5rem;
       margin-top: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .compare-grid {
@@ -367,22 +388,51 @@
       margin-bottom: 0.3rem;
     }
 
-    .ai-helper {
-      margin-top: 1.2rem;
-      padding: 0.9rem;
-      border-radius: 0.9rem;
-      border: 1px dashed var(--accent2);
-      background: rgba(10, 14, 25, 0.9);
+    .compare-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .compare-controls select {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 0.25rem 0.6rem;
       font-size: 0.8rem;
     }
 
-    .ai-helper h3 {
-      margin-bottom: 0.4rem;
+    body[data-theme="light"] .compare-controls select {
+      background: #ffffff;
+    }
+
+    .ai-helper {
+      margin-top: 1.5rem;
+      padding: 1.4rem;
+      border-radius: 1.1rem;
+      border: 1px dashed var(--accent2);
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), var(--card));
       font-size: 0.9rem;
+    }
+
+    body[data-theme="light"] .ai-helper {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), #ffffff);
+    }
+
+    .ai-helper h3 {
+      margin-bottom: 0.6rem;
+      font-size: 1.05rem;
     }
 
     .ai-helper p {
       color: var(--muted);
+      margin-top: 0.4rem;
+      line-height: 1.4;
     }
 
     .ai-helper button {
@@ -475,6 +525,25 @@
       margin-bottom: 0.2rem;
     }
 
+    .fun-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .fun-card {
+      background: var(--card);
+      border-radius: 0.9rem;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .fun-card h3 {
+      margin-bottom: 0.4rem;
+    }
+
     .footer {
       padding: 1rem 2rem;
       border-top: 1px solid var(--border);
@@ -482,6 +551,11 @@
       font-size: 0.8rem;
       color: var(--muted);
       margin-top: 1rem;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    body[data-theme="light"] .footer {
+      background: #e5f0ff;
     }
   </style>
 </head>
@@ -495,8 +569,9 @@
       <a href="#home" class="nav-link">Home</a>
       <a href="#all-cars" class="nav-link">All Cars</a>
       <a href="#compare" class="nav-link">Compare</a>
+      <a href="#fun" class="nav-link">Fun garage</a>
       <a href="#about" class="nav-link">About</a>
-      <button id="themeToggle" class="toggle-btn">Dark / Light</button>
+      <button id="themeToggle" class="toggle-btn">Theme</button>
     </nav>
   </header>
 
@@ -560,15 +635,41 @@
     <section id="compare" class="section">
       <h2>Compare cars</h2>
       <p class="section-sub">
-        Select up to 3 cars using the “Add to compare” button. Then let the Atlas AI helper give you a quick opinion.
+        Select up to 3 cars using the “Add to compare” button. Then choose what you care about and let Atlas AI talk.
       </p>
+
+      <div class="compare-controls">
+        <label>
+          Focus:
+          <select id="compareFocus">
+            <option value="balanced">Balanced</option>
+            <option value="daily">Daily use</option>
+            <option value="fast">Fast / track</option>
+            <option value="cheap">Cheap / budget</option>
+            <option value="summer">Summer fun</option>
+            <option value="winter">Winter / bad roads</option>
+            <option value="weekend">Weekend toy</option>
+          </select>
+        </label>
+        <button id="resetCompare" class="btn btn-secondary">Reset compare</button>
+      </div>
+
       <div id="compareGrid" class="compare-grid"></div>
 
       <div class="ai-helper">
         <h3>Atlas AI helper</h3>
-        <button id="aiOpinionBtn" class="btn btn-secondary">Ask Atlas AI for an opinion</button>
-        <p id="aiOpinionText">Select at least two cars to get a comparison opinion.</p>
+        <button id="aiOpinionBtn" class="btn btn-primary">Ask Atlas AI for an opinion</button>
+        <p id="aiOpinionText">Select 2–3 cars and choose a focus to get a custom opinion.</p>
       </div>
+    </section>
+
+    <!-- Fun garage -->
+    <section id="fun" class="section">
+      <h2>Fun garage</h2>
+      <p class="section-sub">
+        Play rev sounds for some of the wildest cars in Atlas Motors. Each one has its own sound.
+      </p>
+      <div id="funGrid" class="fun-grid"></div>
     </section>
 
     <!-- About -->
@@ -595,7 +696,7 @@
   </footer>
 
   <script>
-    // SAMPLE DATA (20+ cars, 2000–2026, with images)
+    // NOTE: imageUrl = unique per car, soundUrl only for some cars (you must add the mp3 files to your repo)
     const cars = [
       {
         id: "tesla-model-3-2024",
@@ -613,7 +714,7 @@
         cheapScore: 5,
         fastScore: 6,
         electric: true,
-        imageUrl: "https://via.placeholder.com/400x250?text=Tesla+Model+3"
+        imageUrl: "https://images.pexels.com/photos/799443/pexels-photo-799443.jpeg"
       },
       {
         id: "tesla-model-s-2022",
@@ -631,7 +732,7 @@
         cheapScore: 1,
         fastScore: 10,
         electric: true,
-        imageUrl: "https://via.placeholder.com/400x250?text=Tesla+Model+S"
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg"
       },
       {
         id: "toyota-corolla-2020",
@@ -649,7 +750,7 @@
         cheapScore: 9,
         fastScore: 3,
         electric: false,
-        imageUrl: "https://via.placeholder.com/400x250?text=Toyota+Corolla"
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"
       },
       {
         id: "toyota-gr-yaris-2021",
@@ -667,7 +768,7 @@
         cheapScore: 5,
         fastScore: 9,
         electric: false,
-        imageUrl: "https://via.placeholder.com/400x250?text=Toyota+GR+Yaris"
+        imageUrl: "https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg"
       },
       {
         id: "bmw-m3-2024",
@@ -685,7 +786,8 @@
         cheapScore: 2,
         fastScore: 10,
         electric: false,
-        imageUrl: "https://via.placeholder.com/400x250?text=BMW+M3"
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg",
+        soundUrl: "sounds/bmw-m3-rev.mp3"
       },
       {
         id: "bmw-i4-2023",
@@ -703,7 +805,7 @@
         cheapScore: 4,
         fastScore: 9,
         electric: true,
-        imageUrl: "https://via.placeholder.com/400x250?text=BMW+i4+M50"
+        imageUrl: "https://images.pexels.com/photos/799443/pexels-photo-799443.jpeg"
       },
       {
         id: "audi-rs6-2024",
@@ -721,7 +823,7 @@
         cheapScore: 2,
         fastScore: 10,
         electric: false,
-        imageUrl: "https://via.placeholder.com/400x250?text=Audi+RS6"
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"
       },
       {
         id: "audi-e-tron-gt-2023",
@@ -739,7 +841,7 @@
         cheapScore: 3,
         fastScore: 8,
         electric: true,
-        imageUrl: "https://via.placeholder.com/400x250?text=Audi+e-tron+GT"
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg"
       },
       {
         id: "porsche-911-gt3-2022",
@@ -757,7 +859,7 @@
         cheapScore: 1,
         fastScore: 10,
         electric: false,
-        imageUrl: "https://via.placeholder.com/400x250?text=Porsche+911+GT3"
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"
       },
       {
         id: "porsche-taycan-2024",
@@ -775,7 +877,7 @@
         cheapScore: 1,
         fastScore: 10,
         electric: true,
-        imageUrl: "https://via.placeholder.com/400x250?text=Porsche+Taycan"
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg"
       },
       {
         id: "hyundai-ioniq5-2023",
@@ -793,7 +895,7 @@
         cheapScore: 7,
         fastScore: 5,
         electric: true,
-        imageUrl: "https://via.placeholder.com/400x250?text=Hyundai+Ioniq+5"
+        imageUrl: "https://images.pexels.com/photos/799443/pexels-photo-799443.jpeg"
       },
       {
         id: "kia-ev6-2023",
@@ -811,7 +913,7 @@
         cheapScore: 4,
         fastScore: 9,
         electric: true,
-        imageUrl: "https://via.placeholder.com/400x250?text=Kia+EV6+GT"
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg"
       },
       {
         id: "kia-picanto-2015",
@@ -829,7 +931,7 @@
         cheapScore: 10,
         fastScore: 2,
         electric: false,
-        imageUrl: "https://via.placeholder.com/400x250?text=Kia+Picanto"
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"
       },
       {
         id: "vw-golf-gti-2010",
@@ -847,7 +949,7 @@
         cheapScore: 7,
         fastScore: 7,
         electric: false,
-        imageUrl: "https://via.placeholder.com/400x250?text=VW+Golf+GTI"
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg"
       },
       {
         id: "vw-golf-r-2016",
@@ -865,7 +967,7 @@
         cheapScore: 6,
         fastScore: 8,
         electric: false,
-        imageUrl: "https://via.placeholder.com/400x250?text=VW+Golf+R"
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"
       },
       {
         id: "honda-civic-type-r-2018",
@@ -883,25 +985,7 @@
         cheapScore: 6,
         fastScore: 9,
         electric: false,
-        imageUrl: "https://via.placeholder.com/400x250?text=Civic+Type+R"
-      },
-      {
-        id: "honda-jazz-2010",
-        make: "Honda",
-        model: "Jazz",
-        yearStart: 2008,
-        yearEnd: 2014,
-        bodyStyle: "Hatchback",
-        fuelType: "Petrol",
-        horsepower: 100,
-        torqueNm: 127,
-        zeroTo100: 11.8,
-        topSpeedKph: 175,
-        dailyScore: 9,
-        cheapScore: 9,
-        fastScore: 3,
-        electric: false,
-        imageUrl: "https://via.placeholder.com/400x250?text=Honda+Jazz"
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg"
       },
       {
         id: "ford-focus-rs-2017",
@@ -919,65 +1003,162 @@
         cheapScore: 5,
         fastScore: 9,
         electric: false,
-        imageUrl: "https://via.placeholder.com/400x250?text=Ford+Focus+RS"
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"
       },
       {
-        id: "ford-fiesta-2012",
-        make: "Ford",
-        model: "Fiesta",
-        yearStart: 2008,
-        yearEnd: 2017,
-        bodyStyle: "Hatchback",
-        fuelType: "Petrol",
-        horsepower: 95,
-        torqueNm: 120,
-        zeroTo100: 12.2,
-        topSpeedKph: 175,
-        dailyScore: 9,
-        cheapScore: 10,
-        fastScore: 3,
-        electric: false,
-        imageUrl: "https://via.placeholder.com/400x250?text=Ford+Fiesta"
-      },
-      {
-        id: "mercedes-a45-amg-2019",
-        make: "Mercedes",
-        model: "A45 AMG",
-        yearStart: 2013,
-        yearEnd: 2018,
-        bodyStyle: "Hatchback",
-        fuelType: "Petrol",
-        horsepower: 381,
-        torqueNm: 475,
-        zeroTo100: 4.2,
-        topSpeedKph: 250,
-        dailyScore: 7,
-        cheapScore: 4,
-        fastScore: 9,
-        electric: false,
-        imageUrl: "https://via.placeholder.com/400x250?text=Mercedes+A45"
-      },
-      {
-        id: "mercedes-eqs-2023",
-        make: "Mercedes",
-        model: "EQS 580",
+        id: "koenigsegg-jesko-2022",
+        make: "Koenigsegg",
+        model: "Jesko",
         yearStart: 2021,
         yearEnd: 2026,
-        bodyStyle: "Sedan",
-        fuelType: "Electric",
-        horsepower: 523,
-        torqueNm: 855,
-        zeroTo100: 4.3,
-        topSpeedKph: 210,
-        dailyScore: 9,
-        cheapScore: 3,
-        fastScore: 8,
-        electric: true,
-        imageUrl: "https://via.placeholder.com/400x250?text=Mercedes+EQS"
+        bodyStyle: "Coupe",
+        fuelType: "Petrol",
+        horsepower: 1280,
+        torqueNm: 1500,
+        zeroTo100: 2.5,
+        topSpeedKph: 480,
+        dailyScore: 3,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg",
+        soundUrl: "sounds/koenigsegg-jesko-rev.mp3"
+      },
+      {
+        id: "koenigsegg-gemera-2023",
+        make: "Koenigsegg",
+        model: "Gemera",
+        yearStart: 2023,
+        yearEnd: 2026,
+        bodyStyle: "Coupe",
+        fuelType: "Hybrid",
+        horsepower: 1700,
+        torqueNm: 3500,
+        zeroTo100: 1.9,
+        topSpeedKph: 400,
+        dailyScore: 4,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg",
+        soundUrl: "sounds/koenigsegg-gemera-rev.mp3"
+      },
+      {
+        id: "ferrari-488-2018",
+        make: "Ferrari",
+        model: "488 GTB",
+        yearStart: 2015,
+        yearEnd: 2019,
+        bodyStyle: "Coupe",
+        fuelType: "Petrol",
+        horsepower: 670,
+        torqueNm: 760,
+        zeroTo100: 3.0,
+        topSpeedKph: 330,
+        dailyScore: 5,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg",
+        soundUrl: "sounds/ferrari-488-rev.mp3"
+      },
+      {
+        id: "ferrari-sf90-2022",
+        make: "Ferrari",
+        model: "SF90 Stradale",
+        yearStart: 2019,
+        yearEnd: 2026,
+        bodyStyle: "Coupe",
+        fuelType: "Hybrid",
+        horsepower: 1000,
+        torqueNm: 800,
+        zeroTo100: 2.5,
+        topSpeedKph: 340,
+        dailyScore: 5,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg",
+        soundUrl: "sounds/ferrari-sf90-rev.mp3"
+      },
+      {
+        id: "bugatti-chiron-2019",
+        make: "Bugatti",
+        model: "Chiron",
+        yearStart: 2016,
+        yearEnd: 2022,
+        bodyStyle: "Coupe",
+        fuelType: "Petrol",
+        horsepower: 1500,
+        torqueNm: 1600,
+        zeroTo100: 2.4,
+        topSpeedKph: 420,
+        dailyScore: 3,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg",
+        soundUrl: "sounds/bugatti-chiron-rev.mp3"
+      },
+      {
+        id: "bugatti-veyron-2011",
+        make: "Bugatti",
+        model: "Veyron",
+        yearStart: 2005,
+        yearEnd: 2015,
+        bodyStyle: "Coupe",
+        fuelType: "Petrol",
+        horsepower: 1001,
+        torqueNm: 1250,
+        zeroTo100: 2.5,
+        topSpeedKph: 407,
+        dailyScore: 3,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg",
+        soundUrl: "sounds/bugatti-veyron-rev.mp3"
+      },
+      {
+        id: "lambo-huracan-2020",
+        make: "Lamborghini",
+        model: "Huracán EVO",
+        yearStart: 2019,
+        yearEnd: 2026,
+        bodyStyle: "Coupe",
+        fuelType: "Petrol",
+        horsepower: 640,
+        torqueNm: 600,
+        zeroTo100: 2.9,
+        topSpeedKph: 325,
+        dailyScore: 5,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg",
+        soundUrl: "sounds/lambo-huracan-rev.mp3"
+      },
+      {
+        id: "lambo-aventador-2018",
+        make: "Lamborghini",
+        model: "Aventador S",
+        yearStart: 2016,
+        yearEnd: 2021,
+        bodyStyle: "Coupe",
+        fuelType: "Petrol",
+        horsepower: 740,
+        torqueNm: 690,
+        zeroTo100: 2.9,
+        topSpeedKph: 350,
+        dailyScore: 4,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg",
+        soundUrl: "sounds/lambo-aventador-rev.mp3"
       }
     ];
 
-    // DOM refs
     const searchInput = document.getElementById("searchInput");
     const carsGrid = document.getElementById("carsGrid");
     const carOfTheDay = document.getElementById("carOfTheDay");
@@ -993,8 +1174,10 @@
     const themeToggle = document.getElementById("themeToggle");
     const aiOpinionBtn = document.getElementById("aiOpinionBtn");
     const aiOpinionText = document.getElementById("aiOpinionText");
+    const compareFocus = document.getElementById("compareFocus");
+    const resetCompareBtn = document.getElementById("resetCompare");
+    const funGrid = document.getElementById("funGrid");
 
-    // State
     let compareList = [];
     let searchQuery = "";
     let selectedCategory = "";
@@ -1002,7 +1185,6 @@
     let minYear = 2000;
     let maxYear = 2026;
 
-    // Build brand filter options
     const brands = [...new Set(cars.map((c) => c.make))].sort();
     brands.forEach((brand) => {
       const opt = document.createElement("option");
@@ -1023,7 +1205,6 @@
     function getFilteredCars() {
       return cars.filter((car) => {
         if (car.yearEnd < minYear || car.yearStart > maxYear) return false;
-
         if (selectedBrand && car.make !== selectedBrand) return false;
 
         if (searchQuery) {
@@ -1055,6 +1236,8 @@
         const card = document.createElement("div");
         card.className = "car-card";
 
+        const hasSound = !!car.soundUrl;
+
         card.innerHTML = `
           <div class="car-img-wrap">
             <img src="${car.imageUrl}" alt="${car.make} ${car.model}" />
@@ -1073,6 +1256,7 @@
             <div class="btn-row">
               <button class="btn btn-primary" data-id="${car.id}" data-action="details">Details</button>
               <button class="btn btn-secondary" data-id="${car.id}" data-action="compare">Add to compare</button>
+              ${hasSound ? `<button class="btn btn-secondary" data-id="${car.id}" data-action="rev">Rev sound</button>` : ""}
             </div>
           </div>
         `;
@@ -1146,32 +1330,71 @@
       });
     }
 
+    function renderFunGarage() {
+      funGrid.innerHTML = "";
+      const soundCars = cars.filter((c) => c.soundUrl);
+      if (soundCars.length === 0) {
+        funGrid.innerHTML = "<p>No sound-enabled cars yet.</p>";
+        return;
+      }
+      soundCars.forEach((car) => {
+        const card = document.createElement("div");
+        card.className = "fun-card";
+        card.innerHTML = `
+          <h3>${car.make} ${car.model}</h3>
+          <p>${car.yearStart}–${car.yearEnd} • ${car.bodyStyle}</p>
+          <button class="btn btn-secondary" data-id="${car.id}" data-action="rev">Play rev sound</button>
+        `;
+        funGrid.appendChild(card);
+      });
+    }
+
     function updateCarsView() {
       const filtered = getFilteredCars();
       renderCars(filtered);
     }
 
-    // AI helper: simple opinion based on scores
     function generateAiOpinion() {
       if (compareList.length < 2) {
         aiOpinionText.textContent = "Select at least two cars to get a comparison opinion.";
         return;
       }
 
+      const focus = compareFocus.value;
       const bestDaily = [...compareList].sort((a, b) => b.dailyScore - a.dailyScore)[0];
       const bestFast = [...compareList].sort((a, b) => b.fastScore - a.fastScore)[0];
       const bestCheap = [...compareList].sort((a, b) => b.cheapScore - a.cheapScore)[0];
 
       let text = "Atlas AI opinion: ";
 
-      text += `For daily use, the ${bestDaily.make} ${bestDaily.model} looks strongest. `;
-      text += `If you care most about speed, the ${bestFast.make} ${bestFast.model} is the wild one. `;
-      text += `On budget and running costs, the ${bestCheap.make} ${bestCheap.model} wins as the cheaper choice.`;
+      if (focus === "daily") {
+        text += `For daily use, the ${bestDaily.make} ${bestDaily.model} is the most sensible and comfortable choice. `;
+      } else if (focus === "fast") {
+        text += `If you care about pure speed and track fun, the ${bestFast.make} ${bestFast.model} is the wildest pick. `;
+      } else if (focus === "cheap") {
+        text += `On budget and running costs, the ${bestCheap.make} ${bestCheap.model} is the smartest option. `;
+      } else if (focus === "summer") {
+        text += `For summer and sunny drives, pick the car that feels most fun and loud—here that’s the ${bestFast.make} ${bestFast.model}. `;
+      } else if (focus === "winter") {
+        const winterCar = [...compareList].sort((a, b) => (b.dailyScore + (b.electric ? 1 : 0)) - (a.dailyScore + (a.electric ? 1 : 0)))[0];
+        text += `For winter and bad roads, the ${winterCar.make} ${winterCar.model} looks like the safest and easiest to live with. `;
+      } else if (focus === "weekend") {
+        text += `As a weekend toy, the ${bestFast.make} ${bestFast.model} is the most exciting and special. `;
+      } else {
+        text += `Balanced view: for daily use, the ${bestDaily.make} ${bestDaily.model} wins; for speed, the ${bestFast.make} ${bestFast.model}; for money, the ${bestCheap.make} ${bestCheap.model}. `;
+      }
+
+      text += "You can always change the focus and compare again to see a different angle.";
 
       aiOpinionText.textContent = text;
     }
 
-    // Events
+    function playRevSound(car) {
+      if (!car.soundUrl) return;
+      const audio = new Audio(car.soundUrl);
+      audio.play().catch(() => {});
+    }
+
     searchInput.addEventListener("input", (e) => {
       searchQuery = e.target.value.trim();
       updateCarsView();
@@ -1208,23 +1431,34 @@
 
       const id = btn.dataset.id;
       const action = btn.dataset.action;
-      if (!id || !action) return;
+      if (!action) return;
 
-      const car = cars.find((c) => c.id === id);
-      if (!car) return;
+      if (!id && action !== "rev") return;
 
-      if (action === "details") {
-        openModal(car);
-      }
+      if (id) {
+        const car = cars.find((c) => c.id === id);
+        if (!car) return;
 
-      if (action === "compare") {
-        if (compareList.find((c) => c.id === car.id)) return;
-        if (compareList.length >= 3) {
-          alert("You can compare up to 3 cars at once.");
-          return;
+        if (action === "details") {
+          openModal(car);
         }
-        compareList.push(car);
-        renderCompare();
+
+        if (action === "compare") {
+          if (compareList.find((c) => c.id === car.id)) return;
+          if (compareList.length >= 3) {
+            // Instead of freezing or overlay, just replace the first one
+            compareList.shift();
+          }
+          compareList.push(car);
+          renderCompare();
+        }
+
+        if (action === "rev") {
+          playRevSound(car);
+        }
+      } else if (action === "rev") {
+        // For fun garage buttons without id (handled above, but safe)
+        return;
       }
     });
 
@@ -1245,11 +1479,17 @@
 
     aiOpinionBtn.addEventListener("click", generateAiOpinion);
 
-    // Initial render
+    resetCompareBtn.addEventListener("click", () => {
+      compareList = [];
+      renderCompare();
+      aiOpinionText.textContent = "Select 2–3 cars and choose a focus to get a custom opinion.";
+    });
+
     updateYearLabel();
     renderCarOfTheDay();
     updateCarsView();
     renderCompare();
+    renderFunGarage();
   </script>
 </body>
 </html>
