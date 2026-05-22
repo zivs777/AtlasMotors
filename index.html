@@ -3,472 +3,1493 @@
 <head>
   <meta charset="UTF-8" />
   <title>Atlas Motors</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg-light: #f4f5f7;
-      --bg-dark: #05060a;
-      --card-light: #ffffff;
-      --card-dark: #111320;
-      --text-light: #0b0c10;
-      --text-dark: #f7f7ff;
-      --accent: #ff4b4b;
-      --border-subtle: rgba(255, 255, 255, 0.08);
+      --bg: #0f172a;
+      --bg-alt: #0b1120;
+      --card: #111827;
+      --border: #1f2937;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.18);
+      --accent2: #3b82f6;
+    }
+
+    body[data-theme="light"] {
+      --bg: #e5f0ff;
+      --bg-alt: #ffffff;
+      --card: #f3f4ff;
+      --border: #cbd5f5;
+      --text: #0f172a;
+      --muted: #4b5563;
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.12);
+      --accent2: #2563eb;
     }
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg-light);
-      color: var(--text-light);
-      transition: background 0.3s ease, color 0.3s ease;
-    }
-    
-/* FIXED HEADER — MAKES EVERYTHING WHITE AND VISIBLE */
-.topbar {
-  background: #0a1a3a;
-  padding: 0.75rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  color: #ffffff !important;
-  font-weight: 800;
-  font-size: 1.1rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.top-nav button {
-  background: transparent;
-  color: #ffffff !important;
-  border: 1px solid rgba(255,255,255,0.7) !important;
-  padding: 0.45rem 1rem;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.top-nav button:hover {
-  background: #ffffff;
-  color: #0a1a3a !important;
-}
-
-
-    body.dark {
-      background: var(--bg-dark);
-      color: var(--text-dark);
+      background: radial-gradient(circle at top, #38bdf8 0, var(--bg) 45%);
+      color: var(--text);
     }
 
-    /* Top bar */
-    .topbar {
+    .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.75rem 1.5rem;
-      background: linear-gradient(90deg, #111320, #1b1f33);
+      padding: 1rem 2rem;
+      background: linear-gradient(90deg, #0f172a, #1e293b);
+      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 10;
     }
 
     .logo {
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      font-size: 1rem;
-      color: #ffffff; /* always bright */
-    }
-
-    .top-nav {
+      font-size: 0.95rem;
       display: flex;
-      gap: 0.5rem;
       align-items: center;
+      gap: 0.4rem;
     }
 
-    .nav-btn,
-    .theme-toggle {
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      padding: 0.4rem 0.9rem;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      background: transparent;
-      color: #ffffff; /* always white for visibility */
-      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    .logo-badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: radial-gradient(circle at 30% 20%, #ffffff, #f97316);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #111827;
+      font-weight: 900;
     }
 
-    .nav-btn:hover,
-    .theme-toggle:hover {
-      background: #ffffff;
-      color: #111320;
-    }
-
-    /* Hero */
-    .hero {
-      position: relative;
-      padding: 3rem 1.5rem 2rem;
-      overflow: hidden;
-      background: radial-gradient(circle at top, #2b2f55, #05060a);
-      color: #ffffff;
-    }
-
-    body.light .hero {
-      background: radial-gradient(circle at top, #d7e3ff, #7f8bb8);
-      color: #0b0c10;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 700px;
-    }
-
-    .hero h1 {
-      margin: 0 0 0.5rem;
-      font-size: 2.2rem;
-    }
-
-    .hero p {
-      margin: 0;
-      opacity: 0.9;
-    }
-
-    .fog-layer {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.18), transparent 55%),
-        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.12), transparent 55%),
-        radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.16), transparent 60%);
-      opacity: 0.4;
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
-
-    /* Compare section */
-    .compare-section {
-      padding: 2rem 1.5rem 1rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .focus-row {
+    .nav {
       display: flex;
       align-items: center;
       gap: 0.75rem;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .toggle-btn {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      padding: 0.25rem 0.7rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    .toggle-btn:hover {
+      border-color: var(--accent2);
+      color: var(--text);
+    }
+
+    .section {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding-top: 3rem;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+
+    .hero-text h1 {
+      font-size: 2.3rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-text h1 span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
       margin-bottom: 1.5rem;
     }
 
-    .focus-row label {
-      font-weight: 600;
+    .search-wrapper {
+      max-width: 600px;
+      margin-bottom: 1rem;
     }
 
-    #focusSelect {
-      padding: 0.4rem 0.7rem;
+    #searchInput {
+      width: 100%;
+      padding: 0.9rem 1rem;
       border-radius: 999px;
-      border: 1px solid rgba(0, 0, 0, 0.2);
-      font-size: 0.9rem;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--text);
+      backdrop-filter: blur(10px);
+    }
+
+    body[data-theme="light"] #searchInput {
       background: #ffffff;
     }
 
-    body.dark #focusSelect {
-      background: #111320;
-      color: #f7f7ff;
-      border-color: rgba(255, 255, 255, 0.25);
+    #searchInput:focus {
+      outline: none;
+      border-color: var(--accent2);
+      box-shadow: 0 0 0 1px var(--accent-soft);
     }
 
-    .cars-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.25rem;
+    .filters-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+      color: var(--muted);
     }
 
-    .car-card {
-      background: var(--card-light);
+    .filters-row select,
+    .filters-row input[type="range"] {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.8rem;
+    }
+
+    body[data-theme="light"] .filters-row select,
+    body[data-theme="light"] .filters-row input[type="range"] {
+      background: #ffffff;
+    }
+
+    .filters-row label {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .quick-categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .chip {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--muted);
+      padding: 0.4rem 0.9rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    body[data-theme="light"] .chip {
+      background: #ffffff;
+    }
+
+    .chip:hover {
+      border-color: var(--accent);
+      color: var(--text);
+      background: var(--accent-soft);
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top left, var(--accent-soft), var(--card));
       border-radius: 1rem;
-      padding: 1rem 1.1rem;
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, border-color 0.3s ease;
+      padding: 1.2rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
     }
 
-    body.dark .car-card {
-      background: var(--card-dark);
-      border-color: var(--border-subtle);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+    .hero-card h3 {
+      margin-bottom: 0.4rem;
+      font-size: 1rem;
     }
 
-    .car-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
-    }
-
-    .car-card h2 {
-      margin-top: 0;
+    .hero-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
       margin-bottom: 0.6rem;
     }
 
-    .car-card p {
-      margin: 0.15rem 0;
-      font-size: 0.9rem;
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
     }
 
-    /* AI section */
-    .ai-section {
-      max-width: 900px;
-      margin: 1.5rem auto 2.5rem;
-      padding: 1.5rem;
-      border-radius: 1.2rem;
-      background: linear-gradient(135deg, #111320, #1f2340);
-      color: #ffffff;
-      position: relative;
+    .hero-badge {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--muted);
+    }
+
+    body[data-theme="light"] .hero-badge {
+      background: #ffffff;
+    }
+
+    .btn {
+      padding: 0.45rem 0.8rem;
+      font-size: 0.8rem;
+      border-radius: 0.5rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #fb923c);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    body[data-theme="light"] .btn-secondary {
+      background: #ffffff;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent2);
+    }
+
+    .section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .cars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .car-card {
+      background: var(--card);
+      border-radius: 0.9rem;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .car-img-wrap {
+      width: 100%;
+      height: 150px;
       overflow: hidden;
     }
 
-    body.light .ai-section {
-      background: linear-gradient(135deg, #fef3f0, #f7e3ff);
-      color: #0b0c10;
+    .car-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    .ai-section::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 0 0, rgba(255, 75, 75, 0.25), transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(255, 155, 106, 0.25), transparent 60%);
-      opacity: 0.7;
-      pointer-events: none;
+    .car-body {
+      padding: 0.8rem 0.9rem 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
     }
 
-    .ai-section > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .ai-section h2 {
-      margin-top: 0;
-      margin-bottom: 0.4rem;
-    }
-
-    .ai-subtitle {
-      margin-top: 0;
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
-
-    .ai-btn {
-      border: none;
-      padding: 0.55rem 1.2rem;
-      border-radius: 999px;
-      background: #ffffff;
-      color: #111320;
+    .car-title {
       font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease, color 0.2s ease;
-    }
-
-    body.light .ai-btn {
-      background: #111320;
-      color: #ffffff;
-    }
-
-    .ai-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
-    }
-
-    .ai-output {
-      margin-top: 1rem;
-      padding: 0.9rem 1rem;
-      border-radius: 0.9rem;
-      background: rgba(0, 0, 0, 0.35);
       font-size: 0.95rem;
     }
 
-    body.light .ai-output {
-      background: rgba(255, 255, 255, 0.8);
+    .car-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
     }
 
-    /* Responsive */
-    @media (max-width: 640px) {
-      .topbar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.4rem;
-      }
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
 
-      .hero {
-        padding: 2.2rem 1rem 1.5rem;
-      }
+    .btn-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
 
-      .compare-section {
-        padding-inline: 1rem;
-      }
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
 
-      .ai-section {
-        margin-inline: 1rem;
+    .compare-card {
+      background: var(--card);
+      border-radius: 0.9rem;
+      border: 1px solid var(--border);
+      padding: 0.9rem;
+      font-size: 0.8rem;
+    }
+
+    .compare-card h3 {
+      margin-bottom: 0.3rem;
+    }
+
+    .compare-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .compare-controls select {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.8rem;
+    }
+
+    body[data-theme="light"] .compare-controls select {
+      background: #ffffff;
+    }
+
+    .ai-helper {
+      margin-top: 1.5rem;
+      padding: 1.4rem;
+      border-radius: 1.1rem;
+      border: 1px dashed var(--accent2);
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), var(--card));
+      font-size: 0.9rem;
+    }
+
+    body[data-theme="light"] .ai-helper {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), #ffffff);
+    }
+
+    .ai-helper h3 {
+      margin-bottom: 0.6rem;
+      font-size: 1.05rem;
+    }
+
+    .ai-helper p {
+      color: var(--muted);
+      margin-top: 0.4rem;
+      line-height: 1.4;
+    }
+
+    .ai-helper button {
+      margin-bottom: 0.5rem;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.hidden {
+      display: none;
+    }
+
+    .modal-content {
+      background: var(--bg-alt);
+      border-radius: 0.9rem;
+      padding: 1.5rem;
+      max-width: 650px;
+      width: 90%;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.8rem;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.6fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 700px) {
+      .modal-grid {
+        grid-template-columns: 1fr;
       }
+    }
+
+    .modal-img-wrap {
+      width: 100%;
+      border-radius: 0.7rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .modal-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal h2 {
+      margin-bottom: 0.3rem;
+    }
+
+    .modal p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .modal h3 {
+      margin-top: 0.6rem;
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+    }
+
+    .modal ul {
+      list-style: none;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .modal ul li {
+      margin-bottom: 0.2rem;
+    }
+
+    .fun-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .fun-card {
+      background: var(--card);
+      border-radius: 0.9rem;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .fun-card h3 {
+      margin-bottom: 0.4rem;
+    }
+
+    .footer {
+      padding: 1rem 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 1rem;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    body[data-theme="light"] .footer {
+      background: #e5f0ff;
     }
   </style>
 </head>
-<body class="light">
-  <header class="topbar">
-    <div class="logo">Atlas Motors</div>
-    <nav class="top-nav">
-      <button class="nav-btn">Home</button>
-      <button class="nav-btn">Compare</button>
-      <button class="nav-btn">About</button>
-      <button class="theme-toggle" id="themeToggle">Light</button>
+<body data-theme="dark">
+  <header class="header">
+    <div class="logo">
+      <div class="logo-badge">A</div>
+      ATLAS MOTORS
+    </div>
+    <nav class="nav">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#all-cars" class="nav-link">All Cars</a>
+      <a href="#compare" class="nav-link">Compare</a>
+      <a href="#fun" class="nav-link">Fun garage</a>
+      <a href="#about" class="nav-link">About</a>
+      <button id="themeToggle" class="toggle-btn">Theme</button>
     </nav>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="fog-layer"></div>
-      <div class="hero-content">
-        <h1>Compare cars</h1>
-        <p>Choose a focus and let Atlas Motors help you decide.</p>
+    <!-- Hero -->
+    <section id="home" class="section hero">
+      <div class="hero-text">
+        <h1>Every spec. Every model. <span>Atlas Motors.</span></h1>
+        <p class="hero-sub">
+          Search, filter and compare modern cars from the 2000s to today. Specs, performance, and daily usability in one place.
+        </p>
+
+        <div class="search-wrapper">
+          <input id="searchInput" type="text" placeholder="Search by make, model, year..." />
+        </div>
+
+        <div class="filters-row">
+          <label>
+            Brand:
+            <select id="brandFilter">
+              <option value="">All brands</option>
+            </select>
+          </label>
+          <label>
+            Year:
+            <span id="yearLabel">2000–2026</span>
+          </label>
+          <label>
+            From
+            <input type="range" id="yearMin" min="2000" max="2026" value="2000" />
+          </label>
+          <label>
+            To
+            <input type="range" id="yearMax" min="2000" max="2026" value="2026" />
+          </label>
+        </div>
+
+        <div class="quick-categories">
+          <button class="chip" data-category="cheap">Best cheap cars</button>
+          <button class="chip" data-category="fast">Fastest cars</button>
+          <button class="chip" data-category="daily">Best daily cars</button>
+          <button class="chip" data-category="electric">Electric cars</button>
+        </div>
+      </div>
+
+      <div class="hero-card" id="carOfTheDay">
+        <!-- Filled by JS -->
       </div>
     </section>
 
-    <section class="compare-section">
-      <div class="focus-row">
-        <label for="focusSelect">Focus:</label>
-        <select id="focusSelect">
-          <option value="balanced">Balanced</option>
-          <option value="daily">Daily use</option>
-          <option value="fast">Fast / track</option>
-          <option value="cheap">Cheap / budget</option>
-          <option value="summer">Summer fun</option>
-          <option value="winter">Winter / bad roads</option>
-          <option value="weekend">Weekend toy</option>
-        </select>
-      </div>
-
-      <div class="cars-row">
-        <article class="car-card">
-          <h2>Bugatti Chiron</h2>
-          <p><strong>Year:</strong> 2016–present</p>
-          <p><strong>Type:</strong> Coupe – Petrol</p>
-          <p><strong>HP:</strong> 1500</p>
-          <p><strong>Torque:</strong> 1600 Nm</p>
-          <p><strong>0–100 km/h:</strong> 2.4 s</p>
-          <p><strong>Top speed:</strong> 420 km/h</p>
-          <p><strong>Daily:</strong> 3/10</p>
-          <p><strong>Cheap:</strong> 1/10</p>
-          <p><strong>Fast:</strong> 10/10</p>
-        </article>
-
-        <article class="car-card">
-          <h2>Bugatti Veyron</h2>
-          <p><strong>Year:</strong> 2005–2015</p>
-          <p><strong>Type:</strong> Coupe – Petrol</p>
-          <p><strong>HP:</strong> 1001</p>
-          <p><strong>Torque:</strong> 1250 Nm</p>
-          <p><strong>0–100 km/h:</strong> 2.5 s</p>
-          <p><strong>Top speed:</strong> 407 km/h</p>
-          <p><strong>Daily:</strong> 3/10</p>
-          <p><strong>Cheap:</strong> 1/10</p>
-          <p><strong>Fast:</strong> 10/10</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="ai-section">
-      <h2>Atlas AI helper</h2>
-      <p class="ai-subtitle">
-        Choose a focus, then ask Atlas AI for an opinion.
+    <!-- All cars list -->
+    <section id="all-cars" class="section">
+      <h2>Explore all cars</h2>
+      <p class="section-sub">
+        Filter by brand, year, category or search directly. Click “Details” for full specs or “Add to compare” to line them up.
       </p>
-      <button id="askAiBtn" class="ai-btn">Ask Atlas AI for an opinion</button>
-      <div id="aiOutput" class="ai-output">
-        Atlas AI opinion will appear here.
+      <div id="carsGrid" class="cars-grid"></div>
+    </section>
+
+    <!-- Compare section -->
+    <section id="compare" class="section">
+      <h2>Compare cars</h2>
+      <p class="section-sub">
+        Select up to 3 cars using the “Add to compare” button. Then choose what you care about and let Atlas AI talk.
+      </p>
+
+      <div class="compare-controls">
+        <label>
+          Focus:
+          <select id="compareFocus">
+            <option value="balanced">Balanced</option>
+            <option value="daily">Daily use</option>
+            <option value="fast">Fast / track</option>
+            <option value="cheap">Cheap / budget</option>
+            <option value="summer">Summer fun</option>
+            <option value="winter">Winter / bad roads</option>
+            <option value="weekend">Weekend toy</option>
+          </select>
+        </label>
+        <button id="resetCompare" class="btn btn-secondary">Reset compare</button>
       </div>
+
+      <div id="compareGrid" class="compare-grid"></div>
+
+      <div class="ai-helper">
+        <h3>Atlas AI helper</h3>
+        <button id="aiOpinionBtn" class="btn btn-primary">Ask Atlas AI for an opinion</button>
+        <p id="aiOpinionText">Select 2–3 cars and choose a focus to get a custom opinion.</p>
+      </div>
+    </section>
+
+    <!-- Fun garage -->
+    <section id="fun" class="section">
+      <h2>Fun garage</h2>
+      <p class="section-sub">
+        Play rev sounds for some of the wildest cars in Atlas Motors. Each one has its own sound.
+      </p>
+      <div id="funGrid" class="fun-grid"></div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <h2>About Atlas Motors</h2>
+      <p class="section-sub">
+        Atlas Motors is a concept car encyclopedia focused on modern cars from the 2000s to today. This demo uses a curated
+        sample of popular and interesting models across brands and years. You can later connect it to a real database or API
+        to cover every single car.
+      </p>
     </section>
   </main>
 
-  <script>
-    // Theme toggle
-    const themeToggle = document.getElementById("themeToggle");
-    const body = document.body;
+  <!-- Car detail modal -->
+  <div id="carModal" class="modal hidden">
+    <div class="modal-content">
+      <button id="closeModal" class="close-btn">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
 
-    function updateThemeLabel() {
-      themeToggle.textContent = body.classList.contains("dark") ? "Dark" : "Light";
+  <footer class="footer">
+    <span>© Atlas Motors</span>
+  </footer>
+
+  <script>
+    // NOTE: imageUrl = unique per car, soundUrl only for some cars (you must add the mp3 files to your repo)
+    const cars = [
+      {
+        id: "tesla-model-3-2024",
+        make: "Tesla",
+        model: "Model 3",
+        yearStart: 2017,
+        yearEnd: 2026,
+        bodyStyle: "Sedan",
+        fuelType: "Electric",
+        horsepower: 283,
+        torqueNm: 420,
+        zeroTo100: 6.1,
+        topSpeedKph: 201,
+        dailyScore: 9,
+        cheapScore: 5,
+        fastScore: 6,
+        electric: true,
+        imageUrl: "https://images.pexels.com/photos/799443/pexels-photo-799443.jpeg"
+      },
+      {
+        id: "tesla-model-s-2022",
+        make: "Tesla",
+        model: "Model S Plaid",
+        yearStart: 2021,
+        yearEnd: 2026,
+        bodyStyle: "Sedan",
+        fuelType: "Electric",
+        horsepower: 1020,
+        torqueNm: 1420,
+        zeroTo100: 2.1,
+        topSpeedKph: 322,
+        dailyScore: 8,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: true,
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg"
+      },
+      {
+        id: "toyota-corolla-2020",
+        make: "Toyota",
+        model: "Corolla",
+        yearStart: 2019,
+        yearEnd: 2026,
+        bodyStyle: "Hatchback",
+        fuelType: "Petrol",
+        horsepower: 132,
+        torqueNm: 159,
+        zeroTo100: 10.5,
+        topSpeedKph: 190,
+        dailyScore: 10,
+        cheapScore: 9,
+        fastScore: 3,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"
+      },
+      {
+        id: "toyota-gr-yaris-2021",
+        make: "Toyota",
+        model: "GR Yaris",
+        yearStart: 2020,
+        yearEnd: 2026,
+        bodyStyle: "Hatchback",
+        fuelType: "Petrol",
+        horsepower: 261,
+        torqueNm: 360,
+        zeroTo100: 5.5,
+        topSpeedKph: 230,
+        dailyScore: 7,
+        cheapScore: 5,
+        fastScore: 9,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg"
+      },
+      {
+        id: "bmw-m3-2024",
+        make: "BMW",
+        model: "M3 Competition",
+        yearStart: 2021,
+        yearEnd: 2026,
+        bodyStyle: "Sedan",
+        fuelType: "Petrol",
+        horsepower: 510,
+        torqueNm: 650,
+        zeroTo100: 3.9,
+        topSpeedKph: 290,
+        dailyScore: 7,
+        cheapScore: 2,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg",
+        soundUrl: "sounds/bmw-m3-rev.mp3"
+      },
+      {
+        id: "bmw-i4-2023",
+        make: "BMW",
+        model: "i4 M50",
+        yearStart: 2022,
+        yearEnd: 2026,
+        bodyStyle: "Sedan",
+        fuelType: "Electric",
+        horsepower: 544,
+        torqueNm: 795,
+        zeroTo100: 3.9,
+        topSpeedKph: 225,
+        dailyScore: 8,
+        cheapScore: 4,
+        fastScore: 9,
+        electric: true,
+        imageUrl: "https://images.pexels.com/photos/799443/pexels-photo-799443.jpeg"
+      },
+      {
+        id: "audi-rs6-2024",
+        make: "Audi",
+        model: "RS6 Avant",
+        yearStart: 2020,
+        yearEnd: 2026,
+        bodyStyle: "Wagon",
+        fuelType: "Petrol",
+        horsepower: 600,
+        torqueNm: 800,
+        zeroTo100: 3.6,
+        topSpeedKph: 305,
+        dailyScore: 8,
+        cheapScore: 2,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"
+      },
+      {
+        id: "audi-e-tron-gt-2023",
+        make: "Audi",
+        model: "e-tron GT",
+        yearStart: 2021,
+        yearEnd: 2026,
+        bodyStyle: "Sedan",
+        fuelType: "Electric",
+        horsepower: 476,
+        torqueNm: 630,
+        zeroTo100: 4.1,
+        topSpeedKph: 245,
+        dailyScore: 8,
+        cheapScore: 3,
+        fastScore: 8,
+        electric: true,
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg"
+      },
+      {
+        id: "porsche-911-gt3-2022",
+        make: "Porsche",
+        model: "911 GT3",
+        yearStart: 2021,
+        yearEnd: 2026,
+        bodyStyle: "Coupe",
+        fuelType: "Petrol",
+        horsepower: 510,
+        torqueNm: 470,
+        zeroTo100: 3.4,
+        topSpeedKph: 318,
+        dailyScore: 6,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"
+      },
+      {
+        id: "porsche-taycan-2024",
+        make: "Porsche",
+        model: "Taycan Turbo",
+        yearStart: 2020,
+        yearEnd: 2026,
+        bodyStyle: "Sedan",
+        fuelType: "Electric",
+        horsepower: 680,
+        torqueNm: 850,
+        zeroTo100: 3.2,
+        topSpeedKph: 260,
+        dailyScore: 8,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: true,
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg"
+      },
+      {
+        id: "hyundai-ioniq5-2023",
+        make: "Hyundai",
+        model: "Ioniq 5",
+        yearStart: 2021,
+        yearEnd: 2026,
+        bodyStyle: "Crossover",
+        fuelType: "Electric",
+        horsepower: 225,
+        torqueNm: 605,
+        zeroTo100: 7.4,
+        topSpeedKph: 185,
+        dailyScore: 9,
+        cheapScore: 7,
+        fastScore: 5,
+        electric: true,
+        imageUrl: "https://images.pexels.com/photos/799443/pexels-photo-799443.jpeg"
+      },
+      {
+        id: "kia-ev6-2023",
+        make: "Kia",
+        model: "EV6 GT",
+        yearStart: 2022,
+        yearEnd: 2026,
+        bodyStyle: "Crossover",
+        fuelType: "Electric",
+        horsepower: 585,
+        torqueNm: 740,
+        zeroTo100: 3.5,
+        topSpeedKph: 260,
+        dailyScore: 8,
+        cheapScore: 4,
+        fastScore: 9,
+        electric: true,
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg"
+      },
+      {
+        id: "kia-picanto-2015",
+        make: "Kia",
+        model: "Picanto",
+        yearStart: 2011,
+        yearEnd: 2017,
+        bodyStyle: "Hatchback",
+        fuelType: "Petrol",
+        horsepower: 84,
+        torqueNm: 122,
+        zeroTo100: 13.7,
+        topSpeedKph: 170,
+        dailyScore: 8,
+        cheapScore: 10,
+        fastScore: 2,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"
+      },
+      {
+        id: "vw-golf-gti-2010",
+        make: "Volkswagen",
+        model: "Golf GTI Mk6",
+        yearStart: 2009,
+        yearEnd: 2013,
+        bodyStyle: "Hatchback",
+        fuelType: "Petrol",
+        horsepower: 210,
+        torqueNm: 280,
+        zeroTo100: 6.9,
+        topSpeedKph: 240,
+        dailyScore: 8,
+        cheapScore: 7,
+        fastScore: 7,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg"
+      },
+      {
+        id: "vw-golf-r-2016",
+        make: "Volkswagen",
+        model: "Golf R Mk7",
+        yearStart: 2014,
+        yearEnd: 2019,
+        bodyStyle: "Hatchback",
+        fuelType: "Petrol",
+        horsepower: 300,
+        torqueNm: 380,
+        zeroTo100: 5.1,
+        topSpeedKph: 250,
+        dailyScore: 8,
+        cheapScore: 6,
+        fastScore: 8,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"
+      },
+      {
+        id: "honda-civic-type-r-2018",
+        make: "Honda",
+        model: "Civic Type R FK8",
+        yearStart: 2017,
+        yearEnd: 2021,
+        bodyStyle: "Hatchback",
+        fuelType: "Petrol",
+        horsepower: 320,
+        torqueNm: 400,
+        zeroTo100: 5.7,
+        topSpeedKph: 272,
+        dailyScore: 7,
+        cheapScore: 6,
+        fastScore: 9,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg"
+      },
+      {
+        id: "ford-focus-rs-2017",
+        make: "Ford",
+        model: "Focus RS",
+        yearStart: 2016,
+        yearEnd: 2018,
+        bodyStyle: "Hatchback",
+        fuelType: "Petrol",
+        horsepower: 350,
+        torqueNm: 440,
+        zeroTo100: 4.7,
+        topSpeedKph: 266,
+        dailyScore: 7,
+        cheapScore: 5,
+        fastScore: 9,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"
+      },
+      {
+        id: "koenigsegg-jesko-2022",
+        make: "Koenigsegg",
+        model: "Jesko",
+        yearStart: 2021,
+        yearEnd: 2026,
+        bodyStyle: "Coupe",
+        fuelType: "Petrol",
+        horsepower: 1280,
+        torqueNm: 1500,
+        zeroTo100: 2.5,
+        topSpeedKph: 480,
+        dailyScore: 3,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg",
+        soundUrl: "sounds/koenigsegg-jesko-rev.mp3"
+      },
+      {
+        id: "koenigsegg-gemera-2023",
+        make: "Koenigsegg",
+        model: "Gemera",
+        yearStart: 2023,
+        yearEnd: 2026,
+        bodyStyle: "Coupe",
+        fuelType: "Hybrid",
+        horsepower: 1700,
+        torqueNm: 3500,
+        zeroTo100: 1.9,
+        topSpeedKph: 400,
+        dailyScore: 4,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg",
+        soundUrl: "sounds/koenigsegg-gemera-rev.mp3"
+      },
+      {
+        id: "ferrari-488-2018",
+        make: "Ferrari",
+        model: "488 GTB",
+        yearStart: 2015,
+        yearEnd: 2019,
+        bodyStyle: "Coupe",
+        fuelType: "Petrol",
+        horsepower: 670,
+        torqueNm: 760,
+        zeroTo100: 3.0,
+        topSpeedKph: 330,
+        dailyScore: 5,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg",
+        soundUrl: "sounds/ferrari-488-rev.mp3"
+      },
+      {
+        id: "ferrari-sf90-2022",
+        make: "Ferrari",
+        model: "SF90 Stradale",
+        yearStart: 2019,
+        yearEnd: 2026,
+        bodyStyle: "Coupe",
+        fuelType: "Hybrid",
+        horsepower: 1000,
+        torqueNm: 800,
+        zeroTo100: 2.5,
+        topSpeedKph: 340,
+        dailyScore: 5,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg",
+        soundUrl: "sounds/ferrari-sf90-rev.mp3"
+      },
+      {
+        id: "bugatti-chiron-2019",
+        make: "Bugatti",
+        model: "Chiron",
+        yearStart: 2016,
+        yearEnd: 2022,
+        bodyStyle: "Coupe",
+        fuelType: "Petrol",
+        horsepower: 1500,
+        torqueNm: 1600,
+        zeroTo100: 2.4,
+        topSpeedKph: 420,
+        dailyScore: 3,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://thehamiltoncollection.com/cdn/shop/articles/ev-22_1.jpg?v=1770826696&width=1100",
+        soundUrl: "sounds/bugatti-chiron-rev.mp3"
+      },
+      {
+        id: "bugatti-veyron-2011",
+        make: "Bugatti",
+        model: "Veyron",
+        yearStart: 2005,
+        yearEnd: 2015,
+        bodyStyle: "Coupe",
+        fuelType: "Petrol",
+        horsepower: 1001,
+        torqueNm: 1250,
+        zeroTo100: 2.5,
+        topSpeedKph: 407,
+        dailyScore: 3,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://bugatti-newsroom.imgix.net/3f78c94d-c0d3-4fc9-a8db-17c40a7df7cd/track_11",
+        soundUrl: "sounds/bugatti-veyron-rev.mp3"
+      },
+      {
+        id: "lambo-huracan-2020",
+        make: "Lamborghini",
+        model: "Huracán EVO",
+        yearStart: 2019,
+        yearEnd: 2026,
+        bodyStyle: "Coupe",
+        fuelType: "Petrol",
+        horsepower: 640,
+        torqueNm: 600,
+        zeroTo100: 2.9,
+        topSpeedKph: 325,
+        dailyScore: 5,
+        cheapScore: 1,
+        fastScore: 10,
+        electric: false,
+        imageUrl: "https://www.exoticcarhacks.com/wp-content/uploads/2024/02/D-8WJU7I-scaled.jpeg",
+        soundUrl: "sounds/lambo-huracan-rev.mp3"
+      },
+      {
+        id: "lambo-aventador-svj-2018",
+        make: "Lamborghini",
+        model: "Aventador SVJ",
+        yearStart: 2018,
+        yearEnd: 2021,
+        bodyStyle: "Coupe",
+        fuelType: "Petrol",
+        horsepower: 760,
+        torqueNm: 720,
+        zeroTo100: 2.8,
+        topSpeedKph: 350,
+        dailyScore: 4,
+        cheapScore: 2,
+        fastScore: 9,
+        electric: false,
+        imageUrl: "https://www.lambocars.com/wp-content/uploads/2020/11/aventador_svj_10.jpg",
+        soundUrl: "sounds/lambo-aventador-rev.mp3"
+      }
+    ];
+
+    const searchInput = document.getElementById("searchInput");
+    const carsGrid = document.getElementById("carsGrid");
+    const carOfTheDay = document.getElementById("carOfTheDay");
+    const compareGrid = document.getElementById("compareGrid");
+    const chips = document.querySelectorAll(".chip");
+    const modal = document.getElementById("carModal");
+    const closeModalBtn = document.getElementById("closeModal");
+    const modalBody = document.getElementById("modalBody");
+    const brandFilter = document.getElementById("brandFilter");
+    const yearMin = document.getElementById("yearMin");
+    const yearMax = document.getElementById("yearMax");
+    const yearLabel = document.getElementById("yearLabel");
+    const themeToggle = document.getElementById("themeToggle");
+    const aiOpinionBtn = document.getElementById("aiOpinionBtn");
+    const aiOpinionText = document.getElementById("aiOpinionText");
+    const compareFocus = document.getElementById("compareFocus");
+    const resetCompareBtn = document.getElementById("resetCompare");
+    const funGrid = document.getElementById("funGrid");
+
+    let compareList = [];
+    let searchQuery = "";
+    let selectedCategory = "";
+    let selectedBrand = "";
+    let minYear = 2000;
+    let maxYear = 2026;
+
+    const brands = [...new Set(cars.map((c) => c.make))].sort();
+    brands.forEach((brand) => {
+      const opt = document.createElement("option");
+      opt.value = brand;
+      opt.textContent = brand;
+      brandFilter.appendChild(opt);
+    });
+
+    function updateYearLabel() {
+      if (minYear > maxYear) {
+        [minYear, maxYear] = [maxYear, minYear];
+        yearMin.value = minYear;
+        yearMax.value = maxYear;
+      }
+      yearLabel.textContent = `${minYear}–${maxYear}`;
     }
+
+    function getFilteredCars() {
+      return cars.filter((car) => {
+        if (car.yearEnd < minYear || car.yearStart > maxYear) return false;
+        if (selectedBrand && car.make !== selectedBrand) return false;
+
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const match =
+            car.make.toLowerCase().includes(q) ||
+            car.model.toLowerCase().includes(q) ||
+            String(car.yearStart).includes(q) ||
+            String(car.yearEnd).includes(q);
+          if (!match) return false;
+        }
+
+        if (selectedCategory === "cheap" && car.cheapScore < 7) return false;
+        if (selectedCategory === "fast" && car.fastScore < 8) return false;
+        if (selectedCategory === "daily" && car.dailyScore < 8) return false;
+        if (selectedCategory === "electric" && !car.electric) return false;
+
+        return true;
+      });
+    }
+
+    function renderCars(list) {
+      carsGrid.innerHTML = "";
+      if (list.length === 0) {
+        carsGrid.innerHTML = "<p>No cars found. Try adjusting filters or search.</p>";
+        return;
+      }
+      list.forEach((car) => {
+        const card = document.createElement("div");
+        card.className = "car-card";
+
+        const hasSound = !!car.soundUrl;
+
+        card.innerHTML = `
+          <div class="car-img-wrap">
+            <img src="${car.imageUrl}" alt="${car.make} ${car.model}" />
+          </div>
+          <div class="car-body">
+            <div class="car-title">${car.make} ${car.model}</div>
+            <div class="car-meta">${car.yearStart}–${car.yearEnd} • ${car.bodyStyle} • ${car.fuelType}</div>
+            <div class="spec-row">
+              <span>HP: ${car.horsepower}</span>
+              <span>0–100: ${car.zeroTo100}s</span>
+            </div>
+            <div class="spec-row">
+              <span>Daily: ${car.dailyScore}/10</span>
+              <span>Fast: ${car.fastScore}/10</span>
+            </div>
+            <div class="btn-row">
+              <button class="btn btn-primary" data-id="${car.id}" data-action="details">Details</button>
+              <button class="btn btn-secondary" data-id="${car.id}" data-action="compare">Add to compare</button>
+              ${hasSound ? `<button class="btn btn-secondary" data-id="${car.id}" data-action="rev">Rev sound</button>` : ""}
+            </div>
+          </div>
+        `;
+
+        carsGrid.appendChild(card);
+      });
+    }
+
+    function renderCarOfTheDay() {
+      const car = cars[Math.floor(Math.random() * cars.length)];
+      carOfTheDay.innerHTML = `
+        <h3>Car of the day</h3>
+        <p><strong>${car.make} ${car.model}</strong> (${car.yearStart}–${car.yearEnd})</p>
+        <div class="hero-badges">
+          <span class="hero-badge">${car.bodyStyle}</span>
+          <span class="hero-badge">${car.fuelType}</span>
+          <span class="hero-badge">${car.horsepower} hp</span>
+          <span class="hero-badge">${car.zeroTo100}s 0–100</span>
+        </div>
+        <p>Daily: ${car.dailyScore}/10 • Cheap: ${car.cheapScore}/10 • Fast: ${car.fastScore}/10</p>
+        <button class="btn btn-primary" data-id="${car.id}" data-action="details">View full specs</button>
+      `;
+    }
+
+    function openModal(car) {
+      modalBody.innerHTML = `
+        <div class="modal-grid">
+          <div class="modal-img-wrap">
+            <img src="${car.imageUrl}" alt="${car.make} ${car.model}" />
+          </div>
+          <div>
+            <h2>${car.make} ${car.model}</h2>
+            <p>${car.yearStart}–${car.yearEnd} • ${car.bodyStyle} • ${car.fuelType}</p>
+            <h3>Performance</h3>
+            <ul>
+              <li>Horsepower: ${car.horsepower} hp</li>
+              <li>Torque: ${car.torqueNm} Nm</li>
+              <li>0–100 km/h: ${car.zeroTo100} s</li>
+              <li>Top speed: ${car.topSpeedKph} km/h</li>
+            </ul>
+            <h3>Use case</h3>
+            <ul>
+              <li>Daily score: ${car.dailyScore}/10</li>
+              <li>Cheap score: ${car.cheapScore}/10</li>
+              <li>Fast score: ${car.fastScore}/10</li>
+              <li>Electric: ${car.electric ? "Yes" : "No"}</li>
+            </ul>
+          </div>
+        </div>
+      `;
+      modal.classList.remove("hidden");
+    }
+
+    function renderCompare() {
+      compareGrid.innerHTML = "";
+      if (compareList.length === 0) {
+        compareGrid.innerHTML = "<p>No cars selected yet. Add some from the list above.</p>";
+        return;
+      }
+      compareList.forEach((car) => {
+        const card = document.createElement("div");
+        card.className = "compare-card";
+        card.innerHTML = `
+          <h3>${car.make} ${car.model}</h3>
+          <p>${car.yearStart}–${car.yearEnd} • ${car.bodyStyle} • ${car.fuelType}</p>
+          <p>HP: ${car.horsepower} • Torque: ${car.torqueNm} Nm</p>
+          <p>0–100 km/h: ${car.zeroTo100} s • Top speed: ${car.topSpeedKph} km/h</p>
+          <p>Daily: ${car.dailyScore}/10 • Cheap: ${car.cheapScore}/10 • Fast: ${car.fastScore}/10</p>
+        `;
+        compareGrid.appendChild(card);
+      });
+    }
+
+    function renderFunGarage() {
+      funGrid.innerHTML = "";
+      const soundCars = cars.filter((c) => c.soundUrl);
+      if (soundCars.length === 0) {
+        funGrid.innerHTML = "<p>No sound-enabled cars yet.</p>";
+        return;
+      }
+      soundCars.forEach((car) => {
+        const card = document.createElement("div");
+        card.className = "fun-card";
+        card.innerHTML = `
+          <h3>${car.make} ${car.model}</h3>
+          <p>${car.yearStart}–${car.yearEnd} • ${car.bodyStyle}</p>
+          <button class="btn btn-secondary" data-id="${car.id}" data-action="rev">Play rev sound</button>
+        `;
+        funGrid.appendChild(card);
+      });
+    }
+
+    function updateCarsView() {
+      const filtered = getFilteredCars();
+      renderCars(filtered);
+    }
+
+    function generateAiOpinion() {
+      if (compareList.length < 2) {
+        aiOpinionText.textContent = "Select at least two cars to get a comparison opinion.";
+        return;
+      }
+
+      const focus = compareFocus.value;
+      const bestDaily = [...compareList].sort((a, b) => b.dailyScore - a.dailyScore)[0];
+      const bestFast = [...compareList].sort((a, b) => b.fastScore - a.fastScore)[0];
+      const bestCheap = [...compareList].sort((a, b) => b.cheapScore - a.cheapScore)[0];
+
+      let text = "Atlas AI opinion: ";
+
+      if (focus === "daily") {
+        text += `For daily use, the ${bestDaily.make} ${bestDaily.model} is the most sensible and comfortable choice. `;
+      } else if (focus === "fast") {
+        text += `If you care about pure speed and track fun, the ${bestFast.make} ${bestFast.model} is the wildest pick. `;
+      } else if (focus === "cheap") {
+        text += `On budget and running costs, the ${bestCheap.make} ${bestCheap.model} is the smartest option. `;
+      } else if (focus === "summer") {
+        text += `For summer and sunny drives, pick the car that feels most fun and loud—here that’s the ${bestFast.make} ${bestFast.model}. `;
+      } else if (focus === "winter") {
+        const winterCar = [...compareList].sort((a, b) => (b.dailyScore + (b.electric ? 1 : 0)) - (a.dailyScore + (a.electric ? 1 : 0)))[0];
+        text += `For winter and bad roads, the ${winterCar.make} ${winterCar.model} looks like the safest and easiest to live with. `;
+      } else if (focus === "weekend") {
+        text += `As a weekend toy, the ${bestFast.make} ${bestFast.model} is the most exciting and special. `;
+      } else {
+        text += `Balanced view: for daily use, the ${bestDaily.make} ${bestDaily.model} wins; for speed, the ${bestFast.make} ${bestFast.model}; for money, the ${bestCheap.make} ${bestCheap.model}. `;
+      }
+
+      text += "You can always change the focus and compare again to see a different angle.";
+
+      aiOpinionText.textContent = text;
+    }
+
+    function playRevSound(car) {
+      if (!car.soundUrl) return;
+      const audio = new Audio(car.soundUrl);
+      audio.play().catch(() => {});
+    }
+
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value.trim();
+      updateCarsView();
+    });
+
+    brandFilter.addEventListener("change", (e) => {
+      selectedBrand = e.target.value;
+      updateCarsView();
+    });
+
+    yearMin.addEventListener("input", (e) => {
+      minYear = Number(e.target.value);
+      updateYearLabel();
+      updateCarsView();
+    });
+
+    yearMax.addEventListener("input", (e) => {
+      maxYear = Number(e.target.value);
+      updateYearLabel();
+      updateCarsView();
+    });
+
+    chips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const cat = chip.dataset.category;
+        selectedCategory = selectedCategory === cat ? "" : cat;
+        updateCarsView();
+      });
+    });
+
+    document.body.addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+
+      const id = btn.dataset.id;
+      const action = btn.dataset.action;
+      if (!action) return;
+
+      if (!id && action !== "rev") return;
+
+      if (id) {
+        const car = cars.find((c) => c.id === id);
+        if (!car) return;
+
+        if (action === "details") {
+          openModal(car);
+        }
+
+        if (action === "compare") {
+          if (compareList.find((c) => c.id === car.id)) return;
+          if (compareList.length >= 3) {
+            // Instead of freezing or overlay, just replace the first one
+            compareList.shift();
+          }
+          compareList.push(car);
+          renderCompare();
+        }
+
+        if (action === "rev") {
+          playRevSound(car);
+        }
+      } else if (action === "rev") {
+        // For fun garage buttons without id (handled above, but safe)
+        return;
+      }
+    });
+
+    closeModalBtn.addEventListener("click", () => {
+      modal.classList.add("hidden");
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
 
     themeToggle.addEventListener("click", () => {
-      body.classList.toggle("dark");
-      body.classList.toggle("light");
-      updateThemeLabel();
+      const current = document.body.getAttribute("data-theme");
+      document.body.setAttribute("data-theme", current === "dark" ? "light" : "dark");
     });
 
-    updateThemeLabel();
+    aiOpinionBtn.addEventListener("click", generateAiOpinion);
 
-    // AI helper logic
-    const focusSelect = document.getElementById("focusSelect");
-    const askAiBtn = document.getElementById("askAiBtn");
-    const aiOutput = document.getElementById("aiOutput");
-
-    // 3 possible opinions for each focus
-    const aiOpinions = {
-      balanced: [
-        "If you want a balanced choice, look for the car that mixes strong performance with decent comfort and usability, not just the biggest numbers.",
-        "For a balanced setup, the best car is the one that feels good everywhere: city, motorway, and fun roads—not only on a track.",
-        "A balanced pick should give you enough speed to smile, but still be calm, predictable, and easy to live with every day."
-      ],
-      daily: [
-        "For daily use, comfort, visibility, and running costs matter more than top speed. The car that feels relaxing in traffic wins here.",
-        "If you’re driving every day, choose the car that is easy to park, not too thirsty on fuel, and doesn’t feel tiring after a long commute.",
-        "Daily use is about low stress. Smooth suspension, good seats, and simple controls are more important than crazy horsepower."
-      ],
-      fast: [
-        "For fast and track use, the car with the best acceleration, braking, and stability at high speed is the real winner.",
-        "On track days, you want sharp responses and confidence at the limit. The car that feels planted in corners is the best choice.",
-        "If your focus is pure speed, choose the car with the strongest power-to-weight and the quickest 0–100 km/h time."
-      ],
-      cheap: [
-        "For a cheap or budget focus, the best car is the one that costs less to buy and doesn’t punish you with huge running costs.",
-        "A good budget choice has simple parts, reasonable fuel use, and doesn’t need constant expensive maintenance.",
-        "If money matters most, pick the car that you can afford to run every month, not just the one that looks impressive on paper."
-      ],
-      summer: [
-        "For summer fun, choose the car that makes you want to take the long way home—loud engine, sharp steering, and a playful feel.",
-        "Summer driving is about open roads and big smiles. The more exciting and alive the car feels, the better it is for this focus.",
-        "If you care about summer fun, pick the car that feels light, responsive, and happy to be revved, even if it’s not the absolute fastest."
-      ],
-      winter: [
-        "For winter and bad roads, stability and grip are more important than top speed. The safer and more predictable car wins here.",
-        "In cold, wet, or snowy conditions, choose the car that feels secure, with good traction and calm steering, not the wildest one.",
-        "If you’re driving in bad weather, a car that inspires confidence and doesn’t surprise you is the smartest choice."
-      ],
-      weekend: [
-        "A weekend toy should feel special every time you start it—loud, dramatic, and a bit over the top in the best way.",
-        "For a weekend car, practicality doesn’t matter much. The more unique and exciting it feels, the better it fits this role.",
-        "If you want a weekend toy, pick the car that makes you look back at it when you park. Emotion matters more than logic here."
-      ]
-    };
-
-    function getRandomOpinion(focusKey) {
-      const list = aiOpinions[focusKey];
-      if (!list || list.length === 0) return "Atlas AI has no opinion for this focus yet.";
-      const index = Math.floor(Math.random() * list.length);
-      return list[index];
-    }
-
-    askAiBtn.addEventListener("click", () => {
-      const focusValue = focusSelect.value; // balanced, daily, fast, cheap, summer, winter, weekend
-      const opinion = getRandomOpinion(focusValue);
-      aiOutput.textContent = "Atlas AI opinion: " + opinion;
+    resetCompareBtn.addEventListener("click", () => {
+      compareList = [];
+      renderCompare();
+      aiOpinionText.textContent = "Select 2–3 cars and choose a focus to get a custom opinion.";
     });
+
+    updateYearLabel();
+    renderCarOfTheDay();
+    updateCarsView();
+    renderCompare();
+    renderFunGarage();
   </script>
 </body>
 </html>
