@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Atlas Motors</title>
+
   <style>
     :root {
       --bg-light: #f4f5f7;
@@ -15,16 +16,12 @@
       --border-subtle: rgba(255, 255, 255, 0.08);
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: system-ui, sans-serif;
       background: var(--bg-light);
       color: var(--text-light);
-      transition: background 0.3s ease, color 0.3s ease;
+      transition: 0.3s ease;
     }
 
     body.dark {
@@ -32,57 +29,49 @@
       color: var(--text-dark);
     }
 
-    /* Top bar */
+    /* ⭐ FIXED TOP BAR — EVERYTHING WHITE */
     .topbar {
+      background: #0a1a3a;
+      padding: 0.75rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.75rem 1.5rem;
-      background: linear-gradient(90deg, #111320, #1b1f33);
-      position: sticky;
-      top: 0;
-      z-index: 20;
     }
 
     .logo {
+      color: #ffffff !important;
       font-weight: 800;
+      font-size: 1.1rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-size: 1rem;
-      color: #ffffff; /* always bright */
     }
 
     .top-nav {
       display: flex;
       gap: 0.5rem;
-      align-items: center;
     }
 
-    .nav-btn,
-    .theme-toggle {
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      padding: 0.4rem 0.9rem;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      cursor: pointer;
+    .top-nav button {
       background: transparent;
-      color: #ffffff; /* always white for visibility */
-      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      color: #ffffff !important;
+      border: 1px solid rgba(255,255,255,0.7) !important;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: 0.2s;
     }
 
-    .nav-btn:hover,
-    .theme-toggle:hover {
+    .top-nav button:hover {
       background: #ffffff;
-      color: #111320;
+      color: #0a1a3a !important;
     }
 
-    /* Hero */
+    /* HERO */
     .hero {
-      position: relative;
       padding: 3rem 1.5rem 2rem;
-      overflow: hidden;
       background: radial-gradient(circle at top, #2b2f55, #05060a);
-      color: #ffffff;
+      color: white;
+      position: relative;
     }
 
     body.light .hero {
@@ -90,64 +79,41 @@
       color: #0b0c10;
     }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 700px;
-    }
-
-    .hero h1 {
-      margin: 0 0 0.5rem;
-      font-size: 2.2rem;
-    }
-
-    .hero p {
-      margin: 0;
-      opacity: 0.9;
-    }
-
     .fog-layer {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.18), transparent 55%),
-        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.12), transparent 55%),
-        radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.16), transparent 60%);
+        radial-gradient(circle at 20% 0%, rgba(255,255,255,0.18), transparent 55%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.12), transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(255,255,255,0.16), transparent 60%);
       opacity: 0.4;
-      mix-blend-mode: screen;
       pointer-events: none;
     }
 
-    /* Compare section */
+    /* COMPARE SECTION */
     .compare-section {
-      padding: 2rem 1.5rem 1rem;
+      padding: 2rem 1.5rem;
       max-width: 1100px;
-      margin: 0 auto;
+      margin: auto;
     }
 
     .focus-row {
       display: flex;
-      align-items: center;
       gap: 0.75rem;
       margin-bottom: 1.5rem;
-    }
-
-    .focus-row label {
-      font-weight: 600;
+      align-items: center;
     }
 
     #focusSelect {
       padding: 0.4rem 0.7rem;
       border-radius: 999px;
-      border: 1px solid rgba(0, 0, 0, 0.2);
-      font-size: 0.9rem;
-      background: #ffffff;
+      border: 1px solid #aaa;
     }
 
     body.dark #focusSelect {
       background: #111320;
-      color: #f7f7ff;
-      border-color: rgba(255, 255, 255, 0.25);
+      color: white;
+      border-color: #666;
     }
 
     .cars-row {
@@ -158,137 +124,61 @@
 
     .car-card {
       background: var(--card-light);
+      padding: 1rem;
       border-radius: 1rem;
-      padding: 1rem 1.1rem;
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, border-color 0.3s ease;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.08);
     }
 
     body.dark .car-card {
       background: var(--card-dark);
-      border-color: var(--border-subtle);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+      color: white;
     }
 
-    .car-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
-    }
-
-    .car-card h2 {
-      margin-top: 0;
-      margin-bottom: 0.6rem;
-    }
-
-    .car-card p {
-      margin: 0.15rem 0;
-      font-size: 0.9rem;
-    }
-
-    /* AI section */
+    /* AI SECTION */
     .ai-section {
       max-width: 900px;
-      margin: 1.5rem auto 2.5rem;
+      margin: 2rem auto;
       padding: 1.5rem;
-      border-radius: 1.2rem;
-      background: linear-gradient(135deg, #111320, #1f2340);
-      color: #ffffff;
-      position: relative;
-      overflow: hidden;
+      border-radius: 1rem;
+      background: #111320;
+      color: white;
     }
 
     body.light .ai-section {
-      background: linear-gradient(135deg, #fef3f0, #f7e3ff);
+      background: #f7e3ff;
       color: #0b0c10;
     }
 
-    .ai-section::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 0 0, rgba(255, 75, 75, 0.25), transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(255, 155, 106, 0.25), transparent 60%);
-      opacity: 0.7;
-      pointer-events: none;
-    }
-
-    .ai-section > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .ai-section h2 {
-      margin-top: 0;
-      margin-bottom: 0.4rem;
-    }
-
-    .ai-subtitle {
-      margin-top: 0;
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
-
     .ai-btn {
-      border: none;
-      padding: 0.55rem 1.2rem;
+      padding: 0.6rem 1.2rem;
       border-radius: 999px;
-      background: #ffffff;
+      border: none;
+      background: white;
       color: #111320;
-      font-weight: 600;
-      font-size: 0.9rem;
       cursor: pointer;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease, color 0.2s ease;
+      font-weight: 600;
     }
 
     body.light .ai-btn {
       background: #111320;
-      color: #ffffff;
-    }
-
-    .ai-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+      color: white;
     }
 
     .ai-output {
       margin-top: 1rem;
-      padding: 0.9rem 1rem;
-      border-radius: 0.9rem;
-      background: rgba(0, 0, 0, 0.35);
-      font-size: 0.95rem;
+      padding: 1rem;
+      border-radius: 0.8rem;
+      background: rgba(255,255,255,0.15);
     }
 
     body.light .ai-output {
-      background: rgba(255, 255, 255, 0.8);
-    }
-
-    /* Responsive */
-    @media (max-width: 640px) {
-      .topbar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.4rem;
-      }
-
-      .hero {
-        padding: 2.2rem 1rem 1.5rem;
-      }
-
-      .compare-section {
-        padding-inline: 1rem;
-      }
-
-      .ai-section {
-        margin-inline: 1rem;
-      }
+      background: rgba(0,0,0,0.1);
     }
   </style>
 </head>
+
 <body class="light">
+
   <header class="topbar">
     <div class="logo">Atlas Motors</div>
     <nav class="top-nav">
@@ -299,143 +189,108 @@
     </nav>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="fog-layer"></div>
-      <div class="hero-content">
-        <h1>Compare cars</h1>
-        <p>Choose a focus and let Atlas Motors help you decide.</p>
-      </div>
-    </section>
+  <section class="hero">
+    <div class="fog-layer"></div>
+    <h1>Compare cars</h1>
+    <p>Choose a focus and let Atlas Motors help you decide.</p>
+  </section>
 
-    <section class="compare-section">
-      <div class="focus-row">
-        <label for="focusSelect">Focus:</label>
-        <select id="focusSelect">
-          <option value="balanced">Balanced</option>
-          <option value="daily">Daily use</option>
-          <option value="fast">Fast / track</option>
-          <option value="cheap">Cheap / budget</option>
-          <option value="summer">Summer fun</option>
-          <option value="winter">Winter / bad roads</option>
-          <option value="weekend">Weekend toy</option>
-        </select>
+  <section class="compare-section">
+    <div class="focus-row">
+      <label>Focus:</label>
+      <select id="focusSelect">
+        <option value="balanced">Balanced</option>
+        <option value="daily">Daily use</option>
+        <option value="fast">Fast / track</option>
+        <option value="cheap">Cheap / budget</option>
+        <option value="summer">Summer fun</option>
+        <option value="winter">Winter / bad roads</option>
+        <option value="weekend">Weekend toy</option>
+      </select>
+    </div>
+
+    <div class="cars-row">
+      <div class="car-card">
+        <h2>Bugatti Chiron</h2>
+        <p>HP: 1500</p>
+        <p>Fast: 10/10</p>
       </div>
 
-      <div class="cars-row">
-        <article class="car-card">
-          <h2>Bugatti Chiron</h2>
-          <p><strong>Year:</strong> 2016–present</p>
-          <p><strong>Type:</strong> Coupe – Petrol</p>
-          <p><strong>HP:</strong> 1500</p>
-          <p><strong>Torque:</strong> 1600 Nm</p>
-          <p><strong>0–100 km/h:</strong> 2.4 s</p>
-          <p><strong>Top speed:</strong> 420 km/h</p>
-          <p><strong>Daily:</strong> 3/10</p>
-          <p><strong>Cheap:</strong> 1/10</p>
-          <p><strong>Fast:</strong> 10/10</p>
-        </article>
-
-        <article class="car-card">
-          <h2>Bugatti Veyron</h2>
-          <p><strong>Year:</strong> 2005–2015</p>
-          <p><strong>Type:</strong> Coupe – Petrol</p>
-          <p><strong>HP:</strong> 1001</p>
-          <p><strong>Torque:</strong> 1250 Nm</p>
-          <p><strong>0–100 km/h:</strong> 2.5 s</p>
-          <p><strong>Top speed:</strong> 407 km/h</p>
-          <p><strong>Daily:</strong> 3/10</p>
-          <p><strong>Cheap:</strong> 1/10</p>
-          <p><strong>Fast:</strong> 10/10</p>
-        </article>
+      <div class="car-card">
+        <h2>Bugatti Veyron</h2>
+        <p>HP: 1001</p>
+        <p>Fast: 10/10</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="ai-section">
-      <h2>Atlas AI helper</h2>
-      <p class="ai-subtitle">
-        Choose a focus, then ask Atlas AI for an opinion.
-      </p>
-      <button id="askAiBtn" class="ai-btn">Ask Atlas AI for an opinion</button>
-      <div id="aiOutput" class="ai-output">
-        Atlas AI opinion will appear here.
-      </div>
-    </section>
-  </main>
+  <section class="ai-section">
+    <h2>Atlas AI helper</h2>
+    <button id="askAiBtn" class="ai-btn">Ask Atlas AI</button>
+    <div id="aiOutput" class="ai-output">Atlas AI opinion will appear here.</div>
+  </section>
 
   <script>
-    // Theme toggle
+    // THEME TOGGLE
     const themeToggle = document.getElementById("themeToggle");
     const body = document.body;
-
-    function updateThemeLabel() {
-      themeToggle.textContent = body.classList.contains("dark") ? "Dark" : "Light";
-    }
 
     themeToggle.addEventListener("click", () => {
       body.classList.toggle("dark");
       body.classList.toggle("light");
-      updateThemeLabel();
+      themeToggle.textContent = body.classList.contains("dark") ? "Dark" : "Light";
     });
 
-    updateThemeLabel();
+    // AI OPINIONS
+    const aiOpinions = {
+      balanced: [
+        "A balanced pick mixes comfort and speed without going extreme.",
+        "For balance, choose the car that performs well everywhere.",
+        "A good all‑rounder should feel stable, smooth, and quick."
+      ],
+      daily: [
+        "Daily use needs comfort, fuel efficiency, and easy driving.",
+        "For daily driving, choose the car that feels relaxing.",
+        "A good daily car should be smooth, quiet, and predictable."
+      ],
+      fast: [
+        "For speed, the car with the best acceleration wins.",
+        "Track focus needs grip, braking, and stability.",
+        "If you want pure speed, choose the one with the best power‑to‑weight."
+      ],
+      cheap: [
+        "Budget focus means low running costs and simple parts.",
+        "Choose the car that won’t drain your wallet every month.",
+        "Cheap doesn’t mean bad — it means smart and efficient."
+      ],
+      summer: [
+        "Summer fun means loud engines and open roads.",
+        "Choose the car that makes you smile on sunny days.",
+        "A fun summer car should feel light and playful."
+      ],
+      winter: [
+        "Winter needs grip, stability, and confidence.",
+        "Choose the car that handles snow and rain safely.",
+        "Bad roads need predictable handling and traction."
+      ],
+      weekend: [
+        "A weekend toy should feel special every time.",
+        "Choose the car that makes you excited to drive.",
+        "Weekend cars are about emotion, not logic."
+      ]
+    };
 
-    // AI helper logic
     const focusSelect = document.getElementById("focusSelect");
     const askAiBtn = document.getElementById("askAiBtn");
     const aiOutput = document.getElementById("aiOutput");
 
-    // 3 possible opinions for each focus
-    const aiOpinions = {
-      balanced: [
-        "If you want a balanced choice, look for the car that mixes strong performance with decent comfort and usability, not just the biggest numbers.",
-        "For a balanced setup, the best car is the one that feels good everywhere: city, motorway, and fun roads—not only on a track.",
-        "A balanced pick should give you enough speed to smile, but still be calm, predictable, and easy to live with every day."
-      ],
-      daily: [
-        "For daily use, comfort, visibility, and running costs matter more than top speed. The car that feels relaxing in traffic wins here.",
-        "If you’re driving every day, choose the car that is easy to park, not too thirsty on fuel, and doesn’t feel tiring after a long commute.",
-        "Daily use is about low stress. Smooth suspension, good seats, and simple controls are more important than crazy horsepower."
-      ],
-      fast: [
-        "For fast and track use, the car with the best acceleration, braking, and stability at high speed is the real winner.",
-        "On track days, you want sharp responses and confidence at the limit. The car that feels planted in corners is the best choice.",
-        "If your focus is pure speed, choose the car with the strongest power-to-weight and the quickest 0–100 km/h time."
-      ],
-      cheap: [
-        "For a cheap or budget focus, the best car is the one that costs less to buy and doesn’t punish you with huge running costs.",
-        "A good budget choice has simple parts, reasonable fuel use, and doesn’t need constant expensive maintenance.",
-        "If money matters most, pick the car that you can afford to run every month, not just the one that looks impressive on paper."
-      ],
-      summer: [
-        "For summer fun, choose the car that makes you want to take the long way home—loud engine, sharp steering, and a playful feel.",
-        "Summer driving is about open roads and big smiles. The more exciting and alive the car feels, the better it is for this focus.",
-        "If you care about summer fun, pick the car that feels light, responsive, and happy to be revved, even if it’s not the absolute fastest."
-      ],
-      winter: [
-        "For winter and bad roads, stability and grip are more important than top speed. The safer and more predictable car wins here.",
-        "In cold, wet, or snowy conditions, choose the car that feels secure, with good traction and calm steering, not the wildest one.",
-        "If you’re driving in bad weather, a car that inspires confidence and doesn’t surprise you is the smartest choice."
-      ],
-      weekend: [
-        "A weekend toy should feel special every time you start it—loud, dramatic, and a bit over the top in the best way.",
-        "For a weekend car, practicality doesn’t matter much. The more unique and exciting it feels, the better it fits this role.",
-        "If you want a weekend toy, pick the car that makes you look back at it when you park. Emotion matters more than logic here."
-      ]
-    };
-
-    function getRandomOpinion(focusKey) {
-      const list = aiOpinions[focusKey];
-      if (!list || list.length === 0) return "Atlas AI has no opinion for this focus yet.";
-      const index = Math.floor(Math.random() * list.length);
-      return list[index];
-    }
-
     askAiBtn.addEventListener("click", () => {
-      const focusValue = focusSelect.value; // balanced, daily, fast, cheap, summer, winter, weekend
-      const opinion = getRandomOpinion(focusValue);
-      aiOutput.textContent = "Atlas AI opinion: " + opinion;
+      const focus = focusSelect.value;
+      const list = aiOpinions[focus];
+      const random = list[Math.floor(Math.random() * list.length)];
+      aiOutput.textContent = "Atlas AI opinion: " + random;
     });
   </script>
+
 </body>
 </html>
